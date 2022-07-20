@@ -73,10 +73,10 @@ module vga_example (
   wire vblnk_out_db, hblnk_out_db;
   wire [11:0] rgb_out_db;
 
-  wire [10:0] vcount_out_dr, hcount_out_dr;
-  wire vsync_out_dr, hsync_out_dr;
-  wire vblnk_out_dr, hblnk_out_dr;
-  wire [11:0] rgb_out_dr;
+  wire [10:0] vcount_out_da, hcount_out_da;
+  wire vsync_out_da, hsync_out_da;
+  wire vblnk_out_da, hblnk_out_da;
+  wire [11:0] rgb_out_da;
 
   wire [11:0] xpos, ypos;
   
@@ -110,6 +110,17 @@ module vga_example (
     .rst(rst_locked)
   );
   
+      wire [9:0] frame_x_inside_grid;
+    wire [9:0] frame_y_inside_grid;
+          wire [9:0] frame_x_inside_px;
+  wire [9:0] frame_y_inside_px;
+     wire [9:0] number_x_grid;
+     wire [9:0] number_y_grid;
+    wire [9:0] grid_size;
+     wire [6:0] x_start_grid;
+     wire [5:0] y_start_grid ;   
+    
+  
   draw_background my_draw_background(
       .hcount_in(hcount),
       .hsync_in(hsync),
@@ -125,8 +136,48 @@ module vga_example (
       .vcount_out(vcount_out_db),
       .vsync_out(vsync_out_db),
       .vblnk_out(vblnk_out_db),
-      .rgb_out(rgb_out_db)
+      .rgb_out(rgb_out_db),
+      .frame_x_inside_px(),
+      .frame_y_inside_px(),
+      .frame_x_inside_grid(frame_x_inside_grid),
+      .frame_y_inside_grid(frame_y_inside_grid),
+      .number_x_grid(number_x_grid),
+      .number_y_grid(number_y_grid),
+      .grid_size(grid_size)
       );
+        
+      random_coordinates my_random_coordinates(
+          .clk(pclk),
+          .frame_x_inside_grid(frame_x_inside_grid),
+          .frame_y_inside_grid(frame_y_inside_grid),
+          .number_x_grid(number_x_grid),
+          .number_y_grid(number_y_grid),
+          .grid_size(grid_size),
+          .x_start_grid(x_start_grid),
+          .y_start_grid(y_start_grid)
+      );
+      draw_apple my_draw_apple(
+         .hcount_in(hcount_out_db),
+         .hsync_in(hsync_out_db),
+         .hblnk_in(hblnk_out_db),
+         .vcount_in(vcount_out_db),
+         .vsync_in(vsync_out_db),
+         .vblnk_in(vblnk_out_db),
+         .rgb_in(rgb_out_db),
+         .apple_x(x_start_grid),
+         .apple_y(y_start_grid),
+         .grid_size(grid_size),
+         .rst(rst_locked),
+         .pclk(pclk),
+         .hcount_out(hcount_out_da),
+         .hsync_out(hsync_out_da),
+         .hblnk_out(hblnk_out_da),
+         .vcount_out(vcount_out_da),
+         .vsync_out(vsync_out_da),
+         .vblnk_out(vblnk_out_da),
+         .rgb_out(rgb_out_da)
+         );
+      
 /*
   draw_rect my_draw_rect(
     .xpos(xpos),
@@ -225,12 +276,12 @@ module vga_example (
      .pixel_clk(pclk),
       .xpos(xpos),
       .ypos(ypos),
-      .hcount({1'b0,hcount_out_db}), 
-      .vcount({1'b0,vcount_out_db}),
-      .blank(hblnk_out_db || vblnk_out_db),
-      .red_in(rgb_out_db[11:8]),
-      .green_in(rgb_out_db[7:4]),
-      .blue_in(rgb_out_db[3:0]),
+      .hcount({1'b0,hcount_out_da}), 
+      .vcount({1'b0,vcount_out_da}),
+      .blank(hblnk_out_da || vblnk_out_da),
+      .red_in(rgb_out_da[11:8]),
+      .green_in(rgb_out_da[7:4]),
+      .blue_in(rgb_out_da[3:0]),
       .enable_mouse_display_out(enable_mouse_display_out), 
       .red_out(red_out_md),
       .green_out(green_out_md),
@@ -238,8 +289,8 @@ module vga_example (
 );
 
   vga my_vga(
-      .hsync_in(hsync_out_db),
-      .vsync_in(vsync_out_db),
+      .hsync_in(hsync_out_da),
+      .vsync_in(vsync_out_da),
       .rst(rst_locked),
       .pclk(pclk),
       .hsync_out(hsync_out_v),

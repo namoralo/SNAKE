@@ -36,30 +36,40 @@ module draw_background(
     output reg vsync_out,
     output reg vblnk_out,
     output reg [11:0] rgb_out,
-    output reg border
+    output wire [9:0] frame_x_inside_px,
+    output wire [9:0] frame_y_inside_px,
+    output wire [9:0] frame_x_inside_grid,
+    output wire [9:0] frame_y_inside_grid,
+    output wire [9:0] number_x_grid,
+    output wire [9:0] number_y_grid,
+    output wire [9:0] grid_size
     );
     
-    wire [6:0] x_start_grid;
-    wire [5:0] y_start_grid;
-    
-    random_coordinates my_random_coordinates(
-        .clk(pclk),
-        .x_start_grid(x_start_grid),
-        .y_start_grid(y_start_grid)
-    );
-    
+
     localparam 
-        HOR_PIX = 1024,
-        VER_PIX = 768,
-        GRID_SIZE = 16,
-        //BORDER_WIDTH = 1, 
-        FRAME_WIDTH = 1, // in grids
-        FRAME_X_SIZE = 40, // in grids
-        FRAME_Y_SIZE = 20, // in grids
-        FRAME_X_OFFSET = ((HOR_PIX - (FRAME_X_SIZE*GRID_SIZE))/2),
-        FRAME_Y_OFFSET = ((VER_PIX - (FRAME_Y_SIZE*GRID_SIZE))/2);
+        HOR_PIX       = 1024,
+        VER_PIX       = 768,
+        GRID_SIZE     = 16,
+        NUMBER_X_GRID = (HOR_PIX/GRID_SIZE),
+        NUMBER_Y_GRID = (VER_PIX/GRID_SIZE),
+        FRAME_WIDTH   = 1, // in grids
+        FRAME_X_SIZE  = 40, // in grids
+        FRAME_Y_SIZE  = 20, // in grids
+        FRAME_X_OUTSIDE = ((HOR_PIX - (FRAME_X_SIZE*GRID_SIZE))/2),
+        FRAME_Y_OUTSIDE = ((VER_PIX - (FRAME_Y_SIZE*GRID_SIZE))/2),
+        FRAME_X_INSIDE  = (FRAME_X_OUTSIDE + FRAME_WIDTH*GRID_SIZE),
+        FRAME_Y_INSIDE  = (FRAME_Y_OUTSIDE + FRAME_WIDTH*GRID_SIZE);
     
     reg [11:0] rgb_nxt;
+    integer i,j;
+    
+    assign frame_x_inside_px = FRAME_X_INSIDE;
+    assign frame_y_inside_px = FRAME_Y_INSIDE;
+    assign frame_x_inside_grid = (FRAME_X_INSIDE/GRID_SIZE);
+    assign frame_y_inside_grid = (FRAME_Y_INSIDE/GRID_SIZE);
+    assign number_x_grid = NUMBER_X_GRID;
+    assign number_y_grid = NUMBER_Y_GRID;
+    assign grid_size = GRID_SIZE;
     
     always @(posedge pclk or posedge rst) begin
         if(rst) begin
@@ -83,25 +93,36 @@ module draw_background(
     end
     
     always @*
-      begin
-        // During blanking, make it it black.
-        if (vblnk_in || hblnk_in) rgb_nxt = 12'h0_0_0; 
-        else begin
-            if((hcount_in >= FRAME_X_OFFSET) && (hcount_in < (FRAME_X_OFFSET + FRAME_WIDTH*GRID_SIZE)) && (vcount_in >= FRAME_Y_OFFSET) && (vcount_in < (FRAME_Y_OFFSET + FRAME_Y_SIZE*GRID_SIZE)))
-                rgb_nxt = 12'hf_0_0;
-            else  if((hcount_in < (HOR_PIX - FRAME_X_OFFSET)) && (hcount_in >= (HOR_PIX - FRAME_X_OFFSET - FRAME_WIDTH*GRID_SIZE)) && (vcount_in >= FRAME_Y_OFFSET) && (vcount_in < (FRAME_Y_OFFSET + FRAME_Y_SIZE*GRID_SIZE)))
-                rgb_nxt = 12'hf_0_0;
-            else if((hcount_in >= FRAME_X_OFFSET) && (hcount_in < (FRAME_X_OFFSET + FRAME_X_SIZE*GRID_SIZE)) && (vcount_in < (VER_PIX - FRAME_Y_OFFSET)) && (vcount_in >= (VER_PIX - FRAME_Y_OFFSET - FRAME_WIDTH*GRID_SIZE)))
-                rgb_nxt = 12'hf_0_0;
-            else if((hcount_in >= FRAME_X_OFFSET) && (hcount_in < (FRAME_X_OFFSET + FRAME_X_SIZE*GRID_SIZE)) && (vcount_in >= FRAME_Y_OFFSET) && (vcount_in < (FRAME_Y_OFFSET + FRAME_WIDTH*GRID_SIZE)))
-                rgb_nxt = 12'hf_0_0;
-            else if(hcount_in == 0 || hcount_in == 16 || hcount_in == 32 || hcount_in == 48 || hcount_in == 64)
-                rgb_nxt = 12'h0_0_f;
-            else if((hcount_in >= x_start_grid*GRID_SIZE) && (hcount_in < (x_start_grid*GRID_SIZE + GRID_SIZE)) && (vcount_in >= y_start_grid*GRID_SIZE) && (vcount_in < (y_start_grid*GRID_SIZE + GRID_SIZE)))
-                rgb_nxt = 12'hf_f_0;
-            else
-                rgb_nxt = 12'hf_f_f;     
+          begin
+            // During blanking, make it it black.
+            if (vblnk_in || hblnk_in) rgb_nxt = 12'h0_0_0; 
+            else begin
+                if((hcount_in >= FRAME_X_OUTSIDE) && (hcount_in < FRAME_X_INSIDE) && (vcount_in >= FRAME_Y_OUTSIDE) && (vcount_in < (FRAME_Y_SIZE*GRID_SIZE)))
+                    rgb_nxt = 12'hf_f_0;
+                else  if((hcount_in < (HOR_PIX - FRAME_X_OUTSIDE)) && (hcount_in >= (HOR_PIX - FRAME_X_INSIDE)) && (vcount_in >= FRAME_Y_OUTSIDE) && (vcount_in < (FRAME_Y_SIZE*GRID_SIZE)))
+                    rgb_nxt = 12'hf_f_0;
+                else if((hcount_in >= FRAME_X_OUTSIDE) && (hcount_in < (FRAME_X_OUTSIDE + FRAME_X_SIZE*GRID_SIZE)) && (vcount_in < (VER_PIX - FRAME_Y_OUTSIDE)) && (vcount_in >= (VER_PIX - FRAME_Y_INSIDE)))
+                    rgb_nxt = 12'hf_f_0;
+                else if((hcount_in >= FRAME_X_OUTSIDE) && (hcount_in < (FRAME_X_OUTSIDE + FRAME_X_SIZE*GRID_SIZE)) && (vcount_in >= FRAME_Y_OUTSIDE) && (vcount_in < FRAME_Y_INSIDE))
+                    rgb_nxt = 12'hf_f_0;
+                else
+                    rgb_nxt = 12'hf_f_f;    
+            end
+         end
+        
+        
+    always @* begin   
+            for(i = 0; i<NUMBER_X_GRID ; i =i+1)begin
+                if(hcount_in == i*GRID_SIZE)
+                    rgb_nxt = rgb_nxt + 12'h0_0_f ;
+            end  
         end
-     end
-    
+ 
+      always @* begin   
+                
+                for(j = 0; j<NUMBER_Y_GRID ; j =j+1)begin
+                    if(vcount_in == j*GRID_SIZE)
+                        rgb_nxt = rgb_nxt + 12'h0_0_c;
+                end  
+            end
 endmodule
