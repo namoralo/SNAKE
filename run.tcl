@@ -56,6 +56,9 @@ read_verilog {
     rtl/game_over.v
     rtl/game_over_writing.v
     rtl/random_coordinates.v
+    rtl/apple.v
+    rtl/draw_apple.v
+    rtl/snake.v
 }
 
 read_vhd {
