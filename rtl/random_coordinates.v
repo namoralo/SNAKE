@@ -35,27 +35,29 @@ module random_coordinates(
 reg [6:0] x_start_grid_nxt;
 reg [5:0] y_start_grid_nxt;
 
-always @ (posedge clk or posedge reset) begin
+always@(posedge clk or posedge reset) begin
     if(reset) begin
-    x_start_grid <= 14;
-    x_start_grid <= 33;
+        x_start_grid <= frame_x_inside_grid;
+        y_start_grid <= number_y_grid - frame_y_inside_grid;
     end
-    x_start_grid <= x_start_grid_nxt;
-    y_start_grid <= y_start_grid_nxt;
+    else begin
+        x_start_grid <= x_start_grid_nxt;
+        y_start_grid <= y_start_grid_nxt;
+    end
 end
 
 always@* begin
-    if(x_start_grid_nxt < (number_x_grid - frame_x_inside_grid))
-        x_start_grid_nxt = x_start_grid_nxt + 1;
+    if(x_start_grid < (number_x_grid - frame_x_inside_grid - 1))
+        x_start_grid_nxt = x_start_grid + 1;
     else
         x_start_grid_nxt = frame_x_inside_grid;
 end
 
 always@* begin
-    if(y_start_grid_nxt >= frame_y_inside_grid)
-        y_start_grid_nxt = y_start_grid_nxt - 1;
+    if(y_start_grid > frame_y_inside_grid)
+        y_start_grid_nxt = y_start_grid - 1;
     else
-        y_start_grid_nxt = number_y_grid - frame_y_inside_grid;
+        y_start_grid_nxt = number_y_grid - frame_y_inside_grid - 1;
 end
 
 endmodule

@@ -66,7 +66,7 @@ module draw_apple(
        end
 
 always @* begin 
-    if((hcount_in >= (apple_x-1)*grid_size) && (hcount_in < ((apple_x-1)*grid_size + grid_size)) && (vcount_in >= (apple_y-1)*grid_size) && (vcount_in < ((apple_y-1)*grid_size + grid_size)))
+    if((hcount_in >= (apple_x)*grid_size) && (hcount_in < ((apple_x)*grid_size + grid_size)) && (vcount_in >= (apple_y)*grid_size) && (vcount_in < ((apple_y)*grid_size + grid_size)))
         rgb_nxt = 12'hf_0_0; 
     else
         rgb_nxt = rgb_in; 

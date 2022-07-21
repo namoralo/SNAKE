@@ -59,6 +59,7 @@ read_verilog {
     rtl/apple.v
     rtl/draw_apple.v
     rtl/snake.v
+    rtl/move.v
 }
 
 read_vhd {

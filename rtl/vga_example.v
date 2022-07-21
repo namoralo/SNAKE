@@ -118,7 +118,9 @@ module vga_example (
      wire [9:0] number_y_grid;
     wire [9:0] grid_size;
      wire [6:0] x_start_grid;
-     wire [5:0] y_start_grid ;   
+     wire [5:0] y_start_grid ;
+     wire [6:0] apple_x;
+     wire [5:0] apple_y;   
     
   
   draw_background my_draw_background(
@@ -158,6 +160,20 @@ module vga_example (
           .y_start_grid(y_start_grid)
       );
       
+      apple my_apple(
+          .clk(pclk),
+          .reset(rst_locked),
+          .x_start_grid(x_start_grid),
+          .y_start_grid(y_start_grid),
+          .grid_size(grid_size),
+          //.[10:0] head_x,
+          //.[10:0] head_y,
+          .apple_x(apple_x),
+          .apple_y(apple_y),
+          .score() // max 10
+      );
+      
+      
       draw_apple my_draw_apple(
          .hcount_in(hcount_out_db),
          .hsync_in(hsync_out_db),
@@ -166,8 +182,8 @@ module vga_example (
          .vsync_in(vsync_out_db),
          .vblnk_in(vblnk_out_db),
          .rgb_in(rgb_out_db),
-         .apple_x(x_start_grid),
-         .apple_y(y_start_grid),
+         .apple_x(apple_x),
+         .apple_y(apple_y),
          .grid_size(grid_size),
          .rst(rst_locked),
          .pclk(pclk),
