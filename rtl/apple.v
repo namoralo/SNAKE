@@ -40,8 +40,8 @@ module apple(
 always @(posedge clk or posedge reset) begin
     if(reset)begin
         score <= 0;
-        apple_x <= 512;
-        apple_y <= 384;
+        apple_x <= 13;
+        apple_y <= 34;
     end
     else begin
         score <= score_nxt;

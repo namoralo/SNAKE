@@ -22,6 +22,7 @@
 
 module game_over_writing(
             input  wire        clk,
+            input  wire        score, 
             input  wire [7:0]  char_yx, 
             output reg  [6:0]  char_code 
     );
@@ -147,8 +148,8 @@ module game_over_writing(
                 8'h65: data = 7'h00; 
                 8'h66: data = 7'h00; 
                 8'h67: data = 7'h00; 
-                8'h68: data = 7'h00;  
-                8'h69: data = 7'h00; 
+                8'h68: data = (7'h30 + (score/10)); 
+                8'h69: data = (7'h30 + (score%10)); 
                 8'h6a: data = 7'h00; 
                 8'h6b: data = 7'h00; 
                 8'h6c: data = 7'h00; 

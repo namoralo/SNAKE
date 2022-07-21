@@ -148,6 +148,7 @@ module vga_example (
         
       random_coordinates my_random_coordinates(
           .clk(pclk),
+          .reset(rst_locked),
           .frame_x_inside_grid(frame_x_inside_grid),
           .frame_y_inside_grid(frame_y_inside_grid),
           .number_x_grid(number_x_grid),
@@ -156,6 +157,7 @@ module vga_example (
           .x_start_grid(x_start_grid),
           .y_start_grid(y_start_grid)
       );
+      
       draw_apple my_draw_apple(
          .hcount_in(hcount_out_db),
          .hsync_in(hsync_out_db),

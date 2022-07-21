@@ -67,10 +67,6 @@ read_vhd {
     rtl/Ps2Interface.vhd
 }
 
-read_mem {
-    rtl/image_rom.data
-}
-
 add_files -fileset sim_1 {
     sim/testbench.v
     sim/tiff_writer.v

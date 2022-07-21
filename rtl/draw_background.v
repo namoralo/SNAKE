@@ -97,9 +97,9 @@ module draw_background(
             // During blanking, make it it black.
             if (vblnk_in || hblnk_in) rgb_nxt = 12'h0_0_0; 
             else begin
-                if((hcount_in >= FRAME_X_OUTSIDE) && (hcount_in < FRAME_X_INSIDE) && (vcount_in >= FRAME_Y_OUTSIDE) && (vcount_in < (FRAME_Y_SIZE*GRID_SIZE)))
+                if((hcount_in >= FRAME_X_OUTSIDE) && (hcount_in < FRAME_X_INSIDE) && (vcount_in >= FRAME_Y_OUTSIDE) && (vcount_in < (FRAME_Y_OUTSIDE + FRAME_Y_SIZE*GRID_SIZE)))
                     rgb_nxt = 12'hf_f_0;
-                else  if((hcount_in < (HOR_PIX - FRAME_X_OUTSIDE)) && (hcount_in >= (HOR_PIX - FRAME_X_INSIDE)) && (vcount_in >= FRAME_Y_OUTSIDE) && (vcount_in < (FRAME_Y_SIZE*GRID_SIZE)))
+                else  if((hcount_in < (HOR_PIX - FRAME_X_OUTSIDE)) && (hcount_in >= (HOR_PIX - FRAME_X_INSIDE)) && (vcount_in >= FRAME_Y_OUTSIDE) && (vcount_in < (FRAME_Y_OUTSIDE + FRAME_Y_SIZE*GRID_SIZE)))
                     rgb_nxt = 12'hf_f_0;
                 else if((hcount_in >= FRAME_X_OUTSIDE) && (hcount_in < (FRAME_X_OUTSIDE + FRAME_X_SIZE*GRID_SIZE)) && (vcount_in < (VER_PIX - FRAME_Y_OUTSIDE)) && (vcount_in >= (VER_PIX - FRAME_Y_INSIDE)))
                     rgb_nxt = 12'hf_f_0;
@@ -118,11 +118,10 @@ module draw_background(
             end  
         end
  
-      always @* begin   
-                
+   /*   always @* begin   
                 for(j = 0; j<NUMBER_Y_GRID ; j =j+1)begin
                     if(vcount_in == j*GRID_SIZE)
-                        rgb_nxt = rgb_nxt + 12'h0_0_c;
+                        rgb_nxt = rgb_nxt + 12'h0_0_f;
                 end  
-            end
+            end*/
 endmodule

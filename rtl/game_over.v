@@ -37,7 +37,8 @@ module game_over(
     output reg vsync_out,
     output reg vblnk_out,
     output reg [11:0] rgb_out,
-    output reg border,
+    output reg frame,
+    output reg tail,
     output reg game_over
 );
 
@@ -49,8 +50,8 @@ localparam
     FRAME_WIDTH = 1, // in grids
     FRAME_X_SIZE = 40, // in grids
     FRAME_Y_SIZE = 20, // in grids
-    FRAME_X_OFFSET = ((HOR_PIX - (FRAME_X_SIZE*GRID_SIZE))/2),
-    FRAME_Y_OFFSET = ((VER_PIX - (FRAME_Y_SIZE*GRID_SIZE))/2);
+    FRAME_X_OUTSIDE = ((HOR_PIX - (FRAME_X_SIZE*GRID_SIZE))/2),
+    FRAME_Y_OUTSIDE = ((VER_PIX - (FRAME_Y_SIZE*GRID_SIZE))/2);
 
 reg game_over_nxt; 
  
@@ -63,19 +64,26 @@ end
 
 always @(posedge clk or posedge rst) begin
     if(rst)
-        border <= 0;
+        frame <= 0;
     else
-        border <= ((hcount_in < (FRAME_X_OFFSET + FRAME_WIDTH*GRID_SIZE)) || (hcount_in >= (HOR_PIX - FRAME_X_OFFSET - FRAME_WIDTH*GRID_SIZE)) || (vcount_in >= (VER_PIX - FRAME_Y_OFFSET - FRAME_WIDTH*GRID_SIZE)) ||  (vcount_in < (FRAME_Y_OFFSET + FRAME_WIDTH*GRID_SIZE)));
+        frame <= ((hcount_in < (FRAME_X_OUTSIDE + FRAME_WIDTH*GRID_SIZE)) || (hcount_in >= (HOR_PIX - FRAME_X_OUTSIDE - FRAME_WIDTH*GRID_SIZE)) || (vcount_in >= (VER_PIX - FRAME_Y_OUTSIDE - FRAME_WIDTH*GRID_SIZE)) ||  (vcount_in < (FRAME_Y_OUTSIDE + FRAME_WIDTH*GRID_SIZE)));
 end
 
-wire [3:0] char_line;
+always @(posedge clk or posedge rst) begin
+    if(rst)
+        tail <= 0;
+    else
+        tail <= ((hcount_in < (FRAME_X_OUTSIDE + FRAME_WIDTH*GRID_SIZE)) || (hcount_in >= (HOR_PIX - FRAME_X_OUTSIDE - FRAME_WIDTH*GRID_SIZE)) || (vcount_in >= (VER_PIX - FRAME_Y_OUTSIDE - FRAME_WIDTH*GRID_SIZE)) ||  (vcount_in < (FRAME_Y_OUTSIDE + FRAME_WIDTH*GRID_SIZE)));
+end
+
+/*wire [3:0] char_line;
   wire [7:0] char_line_pixels_fr;
 wire [7:0] char_yx;
 wire [3:0] char_line_buf;
 wire [6:0] char_code;
-
+*/
 always @* begin
-    if(border) begin
+    if(frame) begin
         game_over_nxt = 1;
         
 /*draw_rect_char my_draw_rect_char(
