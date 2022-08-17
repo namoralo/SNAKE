@@ -51,21 +51,20 @@ read_verilog {
     rtl/clk_wiz_0_clk_wiz.v
     rtl/vga.v
     rtl/reset_locked.v
-    rtl/draw_rect_char.v
-    rtl/font_rom.v
     rtl/game_over.v
-    rtl/game_over_writing.v
+    rtl/draw_game_over.v
+    rtl/draw_score_reset.v
     rtl/random_coordinates.v
     rtl/apple.v
     rtl/draw_apple.v
-    rtl/snake.v
+    rtl/draw_snake.v
+    rtl/arcade_big_font.v
+    rtl/arcade_small_font.v
+    rtl/game_over_writing.v
+    rtl/score_reset_writing.v
+    rtl/you_win_writing.v
+    rtl/decoder.v
     rtl/move.v
-}
-
-read_vhd {
-    rtl/MouseCtl.vhd
-    rtl/MouseDisplay.vhd
-    rtl/Ps2Interface.vhd
 }
 
 add_files -fileset sim_1 {

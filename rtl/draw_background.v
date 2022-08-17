@@ -36,16 +36,24 @@ module draw_background(
     output reg vsync_out,
     output reg vblnk_out,
     output reg [11:0] rgb_out,
+    output wire [9:0] hor_pix,
+    output wire [9:0] ver_pix,
+    output wire [6:0] frame_x_size_grid,
+    output wire [5:0] frame_y_size_grid,
     output wire [9:0] frame_x_inside_px,
     output wire [9:0] frame_y_inside_px,
-    output wire [9:0] frame_x_inside_grid,
-    output wire [9:0] frame_y_inside_grid,
-    output wire [9:0] number_x_grid,
-    output wire [9:0] number_y_grid,
+    output wire [9:0] frame_x_outside_px,
+    output wire [9:0] frame_y_outside_px,
+    output wire [6:0] frame_x_inside_grid,
+    output wire [5:0] frame_y_inside_grid,
+    output wire [6:0] frame_x_outside_grid,
+    output wire [5:0] frame_y_outside_grid,
+    output wire [6:0] number_x_grid,
+    output wire [5:0] number_y_grid,
     output wire [9:0] grid_size
     );
     
-
+    
     localparam 
         HOR_PIX       = 1024,
         VER_PIX       = 768,
@@ -58,15 +66,25 @@ module draw_background(
         FRAME_X_OUTSIDE = ((HOR_PIX - (FRAME_X_SIZE*GRID_SIZE))/2),
         FRAME_Y_OUTSIDE = ((VER_PIX - (FRAME_Y_SIZE*GRID_SIZE))/2),
         FRAME_X_INSIDE  = (FRAME_X_OUTSIDE + FRAME_WIDTH*GRID_SIZE),
-        FRAME_Y_INSIDE  = (FRAME_Y_OUTSIDE + FRAME_WIDTH*GRID_SIZE);
+        FRAME_Y_INSIDE  = (FRAME_Y_OUTSIDE + FRAME_WIDTH*GRID_SIZE),
+        
+        BORDER_COLOR = 12'h7_4_0,
+        BACKGROUND_COLOR = 12'hd_a_5;
     
     reg [11:0] rgb_nxt;
-    integer i,j;
     
+    assign hor_pix = HOR_PIX;
+    assign ver_pix = VER_PIX;
+    assign frame_x_size_grid = FRAME_X_SIZE;
+    assign frame_y_size_grid = FRAME_Y_SIZE;
     assign frame_x_inside_px = FRAME_X_INSIDE;
     assign frame_y_inside_px = FRAME_Y_INSIDE;
+    assign frame_x_outside_px = FRAME_X_OUTSIDE;
+    assign frame_y_outside_px = FRAME_Y_OUTSIDE;
     assign frame_x_inside_grid = (FRAME_X_INSIDE/GRID_SIZE);
     assign frame_y_inside_grid = (FRAME_Y_INSIDE/GRID_SIZE);
+    assign frame_x_outside_grid = (FRAME_X_OUTSIDE/GRID_SIZE);
+    assign frame_y_outside_grid = (FRAME_Y_OUTSIDE/GRID_SIZE);
     assign number_x_grid = NUMBER_X_GRID;
     assign number_y_grid = NUMBER_Y_GRID;
     assign grid_size = GRID_SIZE;
@@ -92,36 +110,20 @@ module draw_background(
         end        
     end
     
-    always @*
-          begin
-            // During blanking, make it it black.
-            if (vblnk_in || hblnk_in) rgb_nxt = 12'h0_0_0; 
-            else begin
-                if((hcount_in >= FRAME_X_OUTSIDE) && (hcount_in < FRAME_X_INSIDE) && (vcount_in >= FRAME_Y_OUTSIDE) && (vcount_in < (FRAME_Y_OUTSIDE + FRAME_Y_SIZE*GRID_SIZE)))
-                    rgb_nxt = 12'hf_f_0;
-                else  if((hcount_in < (HOR_PIX - FRAME_X_OUTSIDE)) && (hcount_in >= (HOR_PIX - FRAME_X_INSIDE)) && (vcount_in >= FRAME_Y_OUTSIDE) && (vcount_in < (FRAME_Y_OUTSIDE + FRAME_Y_SIZE*GRID_SIZE)))
-                    rgb_nxt = 12'hf_f_0;
-                else if((hcount_in >= FRAME_X_OUTSIDE) && (hcount_in < (FRAME_X_OUTSIDE + FRAME_X_SIZE*GRID_SIZE)) && (vcount_in < (VER_PIX - FRAME_Y_OUTSIDE)) && (vcount_in >= (VER_PIX - FRAME_Y_INSIDE)))
-                    rgb_nxt = 12'hf_f_0;
-                else if((hcount_in >= FRAME_X_OUTSIDE) && (hcount_in < (FRAME_X_OUTSIDE + FRAME_X_SIZE*GRID_SIZE)) && (vcount_in >= FRAME_Y_OUTSIDE) && (vcount_in < FRAME_Y_INSIDE))
-                    rgb_nxt = 12'hf_f_0;
-                else
-                    rgb_nxt = 12'hf_f_f;    
-            end
-         end
-        
-        
-    always @* begin   
-            for(i = 0; i<NUMBER_X_GRID ; i =i+1)begin
-                if(hcount_in == i*GRID_SIZE)
-                    rgb_nxt = rgb_nxt + 12'h0_0_f ;
-            end  
-        end
- 
-   /*   always @* begin   
-                for(j = 0; j<NUMBER_Y_GRID ; j =j+1)begin
-                    if(vcount_in == j*GRID_SIZE)
-                        rgb_nxt = rgb_nxt + 12'h0_0_f;
-                end  
-            end*/
+    always @* begin
+        if (vblnk_in || hblnk_in) rgb_nxt = 12'h0_0_0; 
+        else begin
+            if((hcount_in >= FRAME_X_OUTSIDE) && (hcount_in < FRAME_X_INSIDE) && (vcount_in >= FRAME_Y_OUTSIDE) && (vcount_in < (FRAME_Y_OUTSIDE + FRAME_Y_SIZE*GRID_SIZE)))
+                rgb_nxt = BORDER_COLOR;
+            else  if((hcount_in < (HOR_PIX - FRAME_X_OUTSIDE)) && (hcount_in >= (HOR_PIX - FRAME_X_INSIDE)) && (vcount_in >= FRAME_Y_OUTSIDE) && (vcount_in < (FRAME_Y_OUTSIDE + FRAME_Y_SIZE*GRID_SIZE)))
+                rgb_nxt = BORDER_COLOR;
+            else if((hcount_in >= FRAME_X_OUTSIDE) && (hcount_in < (FRAME_X_OUTSIDE + FRAME_X_SIZE*GRID_SIZE)) && (vcount_in < (VER_PIX - FRAME_Y_OUTSIDE)) && (vcount_in >= (VER_PIX - FRAME_Y_INSIDE)))
+                rgb_nxt = BORDER_COLOR;
+            else if((hcount_in >= FRAME_X_OUTSIDE) && (hcount_in < (FRAME_X_OUTSIDE + FRAME_X_SIZE*GRID_SIZE)) && (vcount_in >= FRAME_Y_OUTSIDE) && (vcount_in < FRAME_Y_INSIDE))
+                rgb_nxt = BORDER_COLOR;
+            else
+            rgb_nxt = BACKGROUND_COLOR;   
+        end            
+    end
+
 endmodule
