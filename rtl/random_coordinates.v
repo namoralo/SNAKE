@@ -36,8 +36,8 @@ reg [5:0] y_start_grid_nxt;
 
 always@(posedge clk or posedge reset) begin
     if(reset) begin
-        x_start_grid <= frame_x_inside_grid;
-    y_start_grid <= number_y_grid - frame_y_inside_grid - 1;
+        x_start_grid <= 20;
+    y_start_grid <= 20;
     end
     else begin
         x_start_grid <= x_start_grid_nxt;

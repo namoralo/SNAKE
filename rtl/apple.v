@@ -40,8 +40,8 @@ module apple(
     always @(posedge clk or posedge reset) begin
         if(reset)begin
             score <= 0;
-            apple_x <= 6'd32;
-            apple_y <= 5'd24;
+            apple_x <= 6'd20;
+            apple_y <= 5'd19;
         end
         else begin
             score <= score_nxt;
@@ -51,7 +51,7 @@ module apple(
     end
     
     always @* begin
-        if((head_x*grid_size == apple_x*grid_size) && (head_y*grid_size == apple_y*grid_size)) begin
+        if((head_x == apple_x) && (head_y == apple_y)) begin
             apple_x_nxt = x_start_grid;
             apple_y_nxt = y_start_grid;
             score_nxt = score + 1;

@@ -1,7 +1,6 @@
 # Constraints for CLK
 set_property PACKAGE_PIN W5 [get_ports clk]
 set_property IOSTANDARD LVCMOS33 [get_ports clk]
-#create_clock -name external_clock -period 10.00 [get_ports clk]
 
 # Constraints for VS and HS
 set_property PACKAGE_PIN R19 [get_ports {vs}]
@@ -61,10 +60,17 @@ set_property IOSTANDARD LVCMOS33 [get_ports {btn[2]}]
 set_property PACKAGE_PIN W19 [get_ports {btn[3]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {btn[3]}]
 
-# Constraints for PS2
-#set_property PACKAGE_PIN C17 [get_ports {ps2_clk}]
-#set_property IOSTANDARD LVCMOS33 [get_ports {ps2_clk}]
-#set_property PACKAGE_PIN B17 [get_ports {ps2_data}]
-#set_property IOSTANDARD LVCMOS33 [get_ports {ps2_data}]
-#set_property PULLUP true [get_ports ps2_clk]
-#set_property PULLUP true [get_ports ps2_data]
+	
+##USB-RS232 Interface
+#set_property PACKAGE_PIN B18 [get_ports RsRx]                        
+    #set_property IOSTANDARD LVCMOS33 [get_ports RsRx]
+set_property PACKAGE_PIN A18 [get_ports tx]                        
+    set_property IOSTANDARD LVCMOS33 [get_ports tx]
+
+#USB HID (PS/2)
+set_property PACKAGE_PIN C17 [get_ports PS2Clk]						
+	set_property IOSTANDARD LVCMOS33 [get_ports PS2Clk]
+	set_property PULLUP true [get_ports PS2Clk]
+set_property PACKAGE_PIN B17 [get_ports PS2Data]					
+	set_property IOSTANDARD LVCMOS33 [get_ports PS2Data]	
+	set_property PULLUP true [get_ports PS2Data]

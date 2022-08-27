@@ -23,13 +23,6 @@
 module game_over(
     input wire clk,
     input wire reset,
-    //input wire [10:0] hcount_in,
-    //input wire hsync_in,
-    //input wire hblnk_in,
-    //input wire [10:0] vcount_in,
-    //input wire vsync_in,
-    //input wire vblnk_in,
-    //input wire [11:0] rgb_in,
     input wire [6:0] frame_x_inside_grid,
     input wire [5:0] frame_y_inside_grid,
     input wire [6:0] frame_x_outside_grid,
@@ -41,17 +34,9 @@ module game_over(
     input wire [104:0] tail_x,
     input wire [89:0]  tail_y,
     input wire [3:0] score,
-    //output reg [10:0] hcount_out,
-    //output reg hsync_out,
-    //output reg hblnk_out,
-    //output reg [10:0] vcount_out,
-    //output reg vsync_out,
-    //output reg vblnk_out,
-    //output reg [11:0] rgb_out,
     output reg game_over, victory
 );
  
- //reg [11:0] rgb_nxt;
  reg game_over_nxt, victory_nxt;
  wire frame, body;
  
@@ -90,52 +75,28 @@ module game_over(
  
 always @(posedge clk or posedge reset) begin
     if(reset) begin
-    /*    hcount_out <= 0;
-        hsync_out <= 0;
-        hblnk_out <= 0;
-        vcount_out <= 0;
-        vsync_out <= 0;
-        vblnk_out <= 0;
-        rgb_out <= 0;*/
         game_over <= 0;
         victory <= 0;
     end
     else begin
-       /* hcount_out <= hcount_in;
-        hsync_out <= hsync_in;
-        hblnk_out <= hblnk_in;
-        vcount_out <= vcount_in;
-        vsync_out <= vsync_in;
-        vblnk_out <= vblnk_in;
-        rgb_out <= rgb_nxt;*/
         game_over <= game_over_nxt;
         victory <= victory_nxt;
     end        
 end
 
     always @* begin
-     /*  if (vblnk_in || hblnk_in) begin
-          //rgb_nxt = 12'h0_0_0; 
-           game_over_nxt = game_over;
-           victory_nxt = victory;
-       end
-        else begin*/
-            if(frame || body) begin
+            if((frame || body) && (victory == 0)) begin
                 game_over_nxt = 1;
                 victory_nxt = victory;
-            //    rgb_nxt = 12'hf_c_b;
             end
             else if(score == 15) begin
                 game_over_nxt = game_over;
                 victory_nxt = 1;
-              //  rgb_nxt = 12'hb_d_f;
             end
             else begin
-                //rgb_nxt = rgb_in;
                 game_over_nxt = game_over;
                 victory_nxt = victory;
             end  
-        end            
-    //end
+        end  
 
 endmodule

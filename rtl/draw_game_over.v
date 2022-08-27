@@ -57,6 +57,7 @@ module draw_game_over(
     wire [10:0] y_game_over, x_game_over, x1_game_over,y1_game_over;
     wire [10:0] y_you_win, x_you_win, x1_you_win, y1_you_win;
    // wire [10:0] y_score_reset, x_score_reset, x1_score_reset, y1_score_reset;
+    wire victory_con_1, victory_con_2, game_over_con_1, game_over_con_2;
     
     localparam 
         GAME_OVER_X_POS_RECT = 152,
@@ -166,12 +167,61 @@ module draw_game_over(
     assign char_yx_score_reset = {y_score_reset[3:0], x_score_reset[3:0]};
     assign char_line_score_reset = y1_score_reset[7:0];
     */
-    always@ * begin
+    
+    assign victory_con_1 = ((hcount_delay1 >= YOU_WIN_X_POS_RECT) && (vcount_delay1 >= YOU_WIN_Y_POS_RECT) && (hcount_delay1 < YOU_WIN_X_POS_RECT + YOU_WIN_WIDTH_RECT) && (vcount_delay1 < YOU_WIN_Y_POS_RECT + YOU_WIN_LENGTH_RECT));
+        assign victory_con_2 = (char_pixels_you_win[7'b1010000 - x1_you_win[6:0]]);
+        assign game_over_con_1 = ((hcount_delay1 >= GAME_OVER_X_POS_RECT) && (vcount_delay1 >= GAME_OVER_Y_POS_RECT) && (hcount_delay1 < GAME_OVER_X_POS_RECT + GAME_OVER_WIDTH_RECT) && (vcount_delay1 < GAME_OVER_Y_POS_RECT + GAME_OVER_LENGTH_RECT));
+        assign game_over_con_2 = (char_pixels_game_over[7'b1001111 - x1_game_over[6:0]]);
+        
+   /* always@ * begin
     if (vblnk_in || hblnk_in) rgb_nxt = 12'h0_0_0; 
             else begin
         if(game_over) begin
             if((hcount_delay1 >= GAME_OVER_X_POS_RECT) && (vcount_delay1 >= GAME_OVER_Y_POS_RECT) && (hcount_delay1 < GAME_OVER_X_POS_RECT + GAME_OVER_WIDTH_RECT) && (vcount_delay1 < GAME_OVER_Y_POS_RECT + GAME_OVER_LENGTH_RECT)) begin
                 if(char_pixels_game_over[7'b1001111 - x1_game_over[6:0]])
+                    rgb_nxt = GAME_OVER_COLOR_LETTER;         
+                else
+                    rgb_nxt = GAME_OVER_COLOR_RECT;
+            end  */
+      /*      else if((hcount_delay1 >= SCORE_RESET_X_POS_RECT) && (vcount_delay1 >= SCORE_RESET_Y_POS_RECT) && (hcount_delay1 < SCORE_RESET_X_POS_RECT + SCORE_RESET_WIDTH_RECT) && (vcount_delay1 < SCORE_RESET_Y_POS_RECT + SCORE_RESET_LENGTH_RECT)) begin
+                if(char_pixels_score_reset[6'b100111 - x1_score_reset[5:0]])
+                    rgb_nxt = GAME_OVER_COLOR_SCORE_RESET;         
+                else
+                    rgb_nxt = GAME_OVER_COLOR_RECT;
+            end 
+*/  /*          else
+                rgb_nxt = GAME_OVER_COLOR_RECT;
+        end
+        
+        else if(victory) begin
+            if((hcount_delay1 >= YOU_WIN_X_POS_RECT) && (vcount_delay1 >= YOU_WIN_Y_POS_RECT) && (hcount_delay1 < YOU_WIN_X_POS_RECT + YOU_WIN_WIDTH_RECT) && (vcount_delay1 < YOU_WIN_Y_POS_RECT + YOU_WIN_LENGTH_RECT)) begin
+                if(char_pixels_you_win[7'b1010000 - x1_you_win[6:0]])
+                    rgb_nxt = YOU_WIN_COLOR_LETTER;         
+                else
+                    rgb_nxt = YOU_WIN_COLOR_RECT;
+            end*/
+  /*          else if((hcount_delay1 >= SCORE_RESET_X_POS_RECT) && (vcount_delay1 >= SCORE_RESET_Y_POS_RECT) && (hcount_delay1 < SCORE_RESET_X_POS_RECT + SCORE_RESET_WIDTH_RECT) && (vcount_delay1 < SCORE_RESET_Y_POS_RECT + SCORE_RESET_LENGTH_RECT)) begin
+                if(char_pixels_score_reset[6'b101000 - x1_score_reset[5:0]])
+                    rgb_nxt = YOU_WIN_COLOR_SCORE_RESET;         
+                else
+                    rgb_nxt = YOU_WIN_COLOR_RECT;
+            end
+    */  /*      else 
+                rgb_nxt = YOU_WIN_COLOR_RECT;
+        end
+        else  rgb_nxt = rgb_out_d1;  
+    end    
+end
+*/
+
+ always@ * begin
+    if (vblnk_in || hblnk_in) rgb_nxt = 12'h0_0_0; 
+            else begin
+            if(hcount_delay1 == 152)
+            rgb_nxt = 12'h000;
+        if(game_over) begin
+            if(game_over_con_1) begin
+                if(game_over_con_2)
                     rgb_nxt = GAME_OVER_COLOR_LETTER;         
                 else
                     rgb_nxt = GAME_OVER_COLOR_RECT;
@@ -187,8 +237,8 @@ module draw_game_over(
         end
         
         else if(victory) begin
-            if((hcount_delay1 >= YOU_WIN_X_POS_RECT) && (vcount_delay1 >= YOU_WIN_Y_POS_RECT) && (hcount_delay1 < YOU_WIN_X_POS_RECT + YOU_WIN_WIDTH_RECT) && (vcount_delay1 < YOU_WIN_Y_POS_RECT + YOU_WIN_LENGTH_RECT)) begin
-                if(char_pixels_you_win[7'b1010000 - x1_you_win[6:0]])
+            if(victory_con_1) begin
+                if(victory_con_2)
                     rgb_nxt = YOU_WIN_COLOR_LETTER;         
                 else
                     rgb_nxt = YOU_WIN_COLOR_RECT;

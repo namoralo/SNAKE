@@ -36,13 +36,13 @@ module you_win_writing(
     
         always @* begin
             case (char_yx)
-                8'h00: data = 8'h47; //Y
-                8'h01: data = 8'h00; //O
-                8'h02: data = 8'h47; //U
+                8'h00: data = 8'h59; //Y
+                8'h01: data = 8'h4f; //O
+                8'h02: data = 8'h55; //U
                 8'h03: data = 8'h00; //
-                8'h04: data = 8'h47; //W
-                8'h05: data = 8'h00; //I
-                8'h06: data = 8'h47; //N
+                8'h04: data = 8'h57; //W
+                8'h05: data = 8'h49; //I
+                8'h06: data = 8'h4e; //N
                 
                 default: data = 8'h00;
             endcase

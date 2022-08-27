@@ -44,27 +44,34 @@ read_xdc {
 }
 
 read_verilog {
-    rtl/vga_timing.v
     rtl/vga_example.v
+    rtl/vga_timing.v
     rtl/draw_background.v
-    rtl/clk_wiz_0.v
-    rtl/clk_wiz_0_clk_wiz.v
-    rtl/vga.v
-    rtl/reset_locked.v
-    rtl/game_over.v
+    rtl/draw_apple.v
+    rtl/draw_snake.v
     rtl/draw_game_over.v
     rtl/draw_score_reset.v
     rtl/random_coordinates.v
     rtl/apple.v
-    rtl/draw_apple.v
-    rtl/draw_snake.v
+    rtl/PS2Receiver.v
+    rtl/decoder.v
+    rtl/move.v
+    rtl/game_over.v
+    rtl/arcade_game_over_font.v    
+    rtl/arcade_you_win_font.v
     rtl/arcade_big_font.v
     rtl/arcade_small_font.v
     rtl/game_over_writing.v
     rtl/score_reset_writing.v
     rtl/you_win_writing.v
-    rtl/decoder.v
-    rtl/move.v
+    rtl/reset_locked.v
+    rtl/clk_wiz_0.v
+    rtl/clk_wiz_0_clk_wiz.v
+    rtl/top.v
+    rtl/bin2ascii.v
+    rtl/debouncer.v
+    rtl/uart_buf_con.v
+    rtl/uart_tx.v
 }
 
 add_files -fileset sim_1 {

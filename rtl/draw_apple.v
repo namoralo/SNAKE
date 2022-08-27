@@ -43,7 +43,7 @@ module draw_apple(
    );
    
    localparam
-       APPLE_COLOR = 12'hb_2_0,//12'hd_0_0,
+       APPLE_COLOR = 12'hb_2_0,
        APPLE_STEM_COLOR = 12'h8_5_0,
        APPLE_LEAF_COLOR = 12'h1_6_0;
        
@@ -106,9 +106,18 @@ always @* begin
         rgb_nxt = rgb_in; 
 end
 */
-
+/*
 always @* begin 
    if((hcount_in >= apple_x*grid_size) && (hcount_in < (apple_x+1)*grid_size) && (vcount_in >= apple_y*grid_size) && (vcount_in < (apple_y+1)*grid_size))
+        rgb_nxt = APPLE_COLOR; 
+    
+    else
+        rgb_nxt = rgb_in; 
+end
+*/
+
+always @* begin 
+   if((hcount_in >= apple_x*grid_size) && (hcount_in < (apple_x*grid_size + grid_size)) && (vcount_in >= apple_y*grid_size) && (vcount_in < (apple_y*grid_size + grid_size)))
         rgb_nxt = APPLE_COLOR; 
     
     else

@@ -38,7 +38,7 @@ module move(
     
 always@(posedge clk or posedge reset) begin
     if(reset) begin
-        head_x <= 6'd50;
+        head_x <= 6'd32;
         head_y <= 5'd24;
         tail_x <= 105'b0;
         tail_y <= 90'b0;
@@ -62,7 +62,7 @@ always@(posedge clk or posedge reset) begin
 end
 
 always @* begin
-if(counter_px == /* 8666112*/ 15165696-1) begin
+if(counter_px == 15165696-1) begin
         counter_px_nxt = 0;
             case (direction)
                 5'b00001: begin // ->

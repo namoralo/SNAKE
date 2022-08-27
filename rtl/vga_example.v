@@ -14,20 +14,22 @@ module vga_example (
   input wire clk,
   input wire rst,
   input wire [3:0] btn,
+  input wire PS2Clk,
+  input wire PS2Data,
   output wire vs,
   output wire hs,
   output wire [3:0] r,
   output wire [3:0] g,
   output wire [3:0] b,
+  output wire tx,
   output wire pclk_mirror
- // inout wire ps2_clk,
-  //inout wire ps2_data
+
   );
 
   // Converts 100 MHz clk into 65 MHz pclk.
 
   wire locked;
-  wire pclk, mclk, rst_locked;
+  wire pclk,kclk, rst_locked;
 
   (* KEEP = "TRUE" *) 
   (* ASYNC_REG = "TRUE" *)
@@ -36,7 +38,7 @@ module vga_example (
   clk_wiz_0 my_clk_wiz_0
   (
   // Clock out ports  
-  .clk100MHz(),
+  .clk100MHz(kclk),
   .clk65MHz(pclk),
   // Status and control signals               
   .reset(rst), 
@@ -141,7 +143,10 @@ module vga_example (
     wire [4:0] direction;
     wire game_over, victory;
     
+    wire [15:0] keycode;
+    
 //////////////////////////////////////  
+  
   
     vga_timing my_timing (
         .vcount(vcount),
@@ -197,13 +202,30 @@ module vga_example (
         .x_start_grid(x_start_grid),
         .y_start_grid(y_start_grid)
     );
-    
+    /*  
+    top my_top(
+      .clk(kclk),
+      .PS2Data(PS2Data),
+      .PS2Clk(PS2Clk),
+      .tx(tx),
+      .keycode_out(keycode)
+  );
+  */
+    PS2Receiver my_PS2Receiver(
+        .clk(pclk),
+        .kclk(PS2Clk),
+        .kdata(PS2Data),
+        .keycode(keycode),
+        .oflag()
+        );
+        
     decoder my_decoder(
         .clk(pclk),
         .reset(rst_locked),
-        .button(btn),
+        .keycode(keycode),
+        //.button(btn),
         .direction(direction)
-        );
+        ); 
     
     move my_move(
         .clk(pclk),
@@ -354,13 +376,13 @@ module vga_example (
         );
     */
     
-    arcade_big_font my_arcade_big_font_game_over(
+    arcade_game_over_font my_arcade_game_over_font(
         .clk(pclk),
         .addr({char_code_game_over,char_line_game_over}),
         .char_line_pixels(char_line_pixels_game_over)
     );
     
-    arcade_big_font my_arcade_big_font_you_win(
+    arcade_you_win_font my_arcade_you_win_font(
         .clk(pclk),
         .addr({char_code_you_win,char_line_you_win}),
         .char_line_pixels(char_line_pixels_you_win)
