@@ -53,6 +53,7 @@ module draw_background(
     output wire [9:0] grid_size
     );
     
+     reg [11:0] rgb_nxt;
     
     localparam 
         HOR_PIX       = 1024,
@@ -70,8 +71,6 @@ module draw_background(
         
         BORDER_COLOR = 12'h7_4_0,
         BACKGROUND_COLOR = 12'hd_a_5;
-    
-    reg [11:0] rgb_nxt;
     
     assign hor_pix = HOR_PIX;
     assign ver_pix = VER_PIX;

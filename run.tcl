@@ -50,6 +50,9 @@ read_verilog {
     rtl/draw_apple.v
     rtl/draw_snake.v
     rtl/draw_game_over.v
+    rtl/draw_numbers.v
+    rtl/draw_reset.v
+    rtl/draw_score.v
     rtl/draw_score_reset.v
     rtl/random_coordinates.v
     rtl/apple.v
@@ -60,7 +63,13 @@ read_verilog {
     rtl/arcade_game_over_font.v    
     rtl/arcade_you_win_font.v
     rtl/arcade_big_font.v
+    rtl/arcade_game_over_font.v
+    rtl/arcade_numbers_font.v
+    rtl/arcade_you_win_font.v
     rtl/arcade_small_font.v
+    rtl/numbers_writing.v
+    rtl/score_writing.v
+    rtl/reset_writing.v
     rtl/game_over_writing.v
     rtl/score_reset_writing.v
     rtl/you_win_writing.v

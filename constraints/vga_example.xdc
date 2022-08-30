@@ -64,8 +64,8 @@ set_property IOSTANDARD LVCMOS33 [get_ports {btn[3]}]
 ##USB-RS232 Interface
 #set_property PACKAGE_PIN B18 [get_ports RsRx]                        
     #set_property IOSTANDARD LVCMOS33 [get_ports RsRx]
-set_property PACKAGE_PIN A18 [get_ports tx]                        
-    set_property IOSTANDARD LVCMOS33 [get_ports tx]
+#set_property PACKAGE_PIN A18 [get_ports tx]                        
+ #   set_property IOSTANDARD LVCMOS33 [get_ports tx]
 
 #USB HID (PS/2)
 set_property PACKAGE_PIN C17 [get_ports PS2Clk]						

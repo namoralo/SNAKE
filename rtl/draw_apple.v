@@ -49,8 +49,7 @@ module draw_apple(
        
    
    reg [11:0] rgb_nxt;
-   //wire [20:0] x_nxt, y_nxt,z_nxt;
-   //wire[20:0] x,y;
+   
     always @(posedge pclk or posedge rst) begin
            if(rst) begin
                hcount_out <= 0;
@@ -71,50 +70,6 @@ module draw_apple(
                rgb_out <= rgb_nxt;
            end        
        end
-
-   /* always @(posedge pclk or rst) begin
-            if(rst) begin
-              x <= 0;
-             y <= 0;
-             z <= 0;
-       end
-       else begin
-              x <= x_nxt;
-        y <= y_nxt;
-        z <= z_nxt;
-       end
- 
-                      end
-
-assign x_nxt = (hcount_in - (apple_x*grid_size + (grid_size/2)))*(hcount_in - (apple_x*grid_size + (grid_size/2)));
-assign y_nxt = (vcount_in - (apple_y*grid_size + (grid_size/2)))*(vcount_in - (apple_y*grid_size + (grid_size/2)));
-assign y_nxt = (vcount_in - (apple_y*grid_size + (grid_size/2)))*(vcount_in - (apple_y*grid_size + (grid_size/2)));
-assign z_nxt = (grid_size/2)*(grid_size/2);
-
-assign x = (x_nxt*x_nxt);
-assign y = (y_nxt*y_nxt);
-*//*
-assign x_nxt = (apple_x*grid_size + (grid_size/2));
-assign y_nxt = (apple_y*grid_size + (grid_size/2));
-assign z_nxt = (grid_size/2)*(grid_size/2);
-
-always @* begin 
-    if(((hcount_in - x_nxt)*(hcount_in - x_nxt)) + ((vcount_in - y_nxt)*(vcount_in - y_nxt)) < z_nxt)
-       //if(x + y < z_nxt)
-      rgb_nxt = APPLE_COLOR;
-    else
-        rgb_nxt = rgb_in; 
-end
-*/
-/*
-always @* begin 
-   if((hcount_in >= apple_x*grid_size) && (hcount_in < (apple_x+1)*grid_size) && (vcount_in >= apple_y*grid_size) && (vcount_in < (apple_y+1)*grid_size))
-        rgb_nxt = APPLE_COLOR; 
-    
-    else
-        rgb_nxt = rgb_in; 
-end
-*/
 
 always @* begin 
    if((hcount_in >= apple_x*grid_size) && (hcount_in < (apple_x*grid_size + grid_size)) && (vcount_in >= apple_y*grid_size) && (vcount_in < (apple_y*grid_size + grid_size)))
