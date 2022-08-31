@@ -18,27 +18,27 @@ module testbench;
   // Then, instantiate the design to be tested.
 
   reg clk, rst;
-  wire pclk_mirror;
+  wire pclk;
   wire vs, hs;
   wire [3:0] r, g, b;
 
   // Instantiate the vga_example module.
   
-  vga_example my_example (
+  snake_top my_snake_top (
     .clk(clk),
     .vs(vs),
     .hs(hs),
     .r(r),
     .g(g),
     .b(b),
-    .pclk_mirror(pclk_mirror),
+    .pclk(pclk),
     .rst(rst)
   );
 
   // Instantiate the tiff_writer module.
 
   tiff_writer my_writer (
-    .pclk_mirror(pclk_mirror),
+    .pclk(pclk),
     .r({r,r}), // fabricate an 8-bit value
     .g({g,g}), // fabricate an 8-bit value
     .b({b,b}), // fabricate an 8-bit value
@@ -73,7 +73,7 @@ module testbench;
     rst = 1'b1;
      #1000;
     rst = 1'b0;
-    //#10000
+    //#50000
     //rst = 1'b1;
     //#1000;
     //rst = 1'b0;

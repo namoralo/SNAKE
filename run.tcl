@@ -1,5 +1,5 @@
 set project Snake
-set top_module vga_example
+set top_module snake_top
 set target xc7a35tcpg236-1
 set bitstream_file build/${project}.runs/impl_1/${top_module}.bit
 
@@ -44,36 +44,36 @@ read_xdc {
 }
 
 read_verilog {
-    rtl/vga_example.v
+    rtl/snake_top.v
     rtl/vga_timing.v
     rtl/draw_background.v
     rtl/draw_apple.v
     rtl/draw_snake.v
     rtl/draw_game_over.v
     rtl/draw_you_win.v
-    rtl/draw_numbers.v
-    rtl/draw_reset.v
-    rtl/draw_score.v
     rtl/draw_score_reset.v
     rtl/random_coordinates.v
     rtl/apple.v
-    rtl/PS2Receiver.v
+    rtl/PS2Receiver_copy.v
     rtl/decoder.v
     rtl/move.v
     rtl/game_over.v
     rtl/arcade_game_over_font.v    
     rtl/arcade_you_win_font.v
-    rtl/arcade_big_font.v
-    rtl/arcade_game_over_font.v
     rtl/arcade_numbers_font.v
-    rtl/arcade_you_win_font.v
     rtl/arcade_small_font.v
     rtl/numbers_writing.v
     rtl/score_writing.v
     rtl/reset_writing.v
     rtl/game_over_writing.v
-    rtl/score_reset_writing.v
     rtl/you_win_writing.v
+    rtl/display.v
+    rtl/bcd2sseg.v
+    rtl/bin2bcd.v
+    rtl/clk_divider.v
+    rtl/ring_counter.v
+    rtl/sseg_mux.v
+    rtl/sseg_x4.v
     rtl/reset_locked.v
     rtl/clk_wiz_0.v
     rtl/clk_wiz_0_clk_wiz.v

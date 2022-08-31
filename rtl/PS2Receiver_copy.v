@@ -20,7 +20,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module PS2Receiver(
+module PS2Receiver_copy(
+	input reset,
     input clk,
     input kclk,
     input kdata,
@@ -72,13 +73,19 @@ end
 
 reg pflag;
 always@(posedge clk) begin
-    if (flag == 1'b1 && pflag == 1'b0) begin
-        keycode <= {dataprev, datacur};
-        oflag <= 1'b1;
-        dataprev <= datacur;
-    end else
-        oflag <= 'b0;
-    pflag <= flag;
+	if(reset) begin
+		keycode <= {{8{1'b0}},{8{1'b0}}};
+		dataprev <= {8{1'b0}};
+	end 
+	else begin
+		if (flag == 1'b1 && pflag == 1'b0) begin
+			keycode <= {dataprev, datacur};
+			oflag <= 1'b1;
+			dataprev <= datacur;
+		end else
+			oflag <= 'b0;
+			pflag <= flag;
+	end
 end
 
 endmodule

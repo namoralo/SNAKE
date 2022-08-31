@@ -21,32 +21,32 @@
 
 
 module game_over_writing(
+    input  wire        clk,
+    input  wire [7:0]  char_yx, 
+    output reg  [7:0]  char_code 
+);
 
-            input  wire        clk,
-            input  wire [7:0]  char_yx, 
-            output reg  [7:0]  char_code 
-    );
-    
-        // signal declaration
-        reg [7:0] data;
-    
-        // body
-        always @(posedge clk)
-            char_code <= data;
-    
-        always @* begin
-            case (char_yx)
-                8'h00: data = 8'h47; //G
-                8'h01: data = 8'h41; //A
-                8'h02: data = 8'h4d; //M
-                8'h03: data = 8'h45; //E
-                8'h04: data = 8'h00; //
-                8'h05: data = 8'h4f; //O
-                8'h06: data = 8'h56; //V
-                8'h07: data = 8'h45; //E
-                8'h08: data = 8'h52; //R
-                
-                default: data = 8'h00;
-            endcase
-    end
+    // signal declaration
+    reg [7:0] data;
+
+// body
+always @(posedge clk)
+    char_code <= data;
+
+always @* begin
+    case (char_yx)
+        8'h00: data = 8'h47; //G
+        8'h01: data = 8'h41; //A
+        8'h02: data = 8'h4d; //M
+        8'h03: data = 8'h45; //E
+        8'h04: data = 8'h00; //
+        8'h05: data = 8'h4f; //O
+        8'h06: data = 8'h56; //V
+        8'h07: data = 8'h45; //E
+        8'h08: data = 8'h52; //R
+        
+        default: data = 8'h00;
+    endcase
+end
+
 endmodule

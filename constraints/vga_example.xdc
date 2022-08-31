@@ -38,10 +38,6 @@ set_property IOSTANDARD LVCMOS33 [get_ports {b[2]}]
 set_property PACKAGE_PIN J18 [get_ports {b[3]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {b[3]}]
 
-# Constraints for PCLK_MIRROR
-set_property PACKAGE_PIN J1 [get_ports {pclk_mirror}]
-set_property IOSTANDARD LVCMOS33 [get_ports {pclk_mirror}]
-
 # Constraints for CFGBVS
 set_property CFGBVS VCCO [current_design]
 set_property CONFIG_VOLTAGE 3.3 [current_design]
@@ -60,6 +56,34 @@ set_property IOSTANDARD LVCMOS33 [get_ports {btn[2]}]
 set_property PACKAGE_PIN W19 [get_ports {btn[3]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {btn[3]}]
 
+##7 segment display
+set_property PACKAGE_PIN W7 [get_ports {sseg_ca[0]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {sseg_ca[0]}]
+set_property PACKAGE_PIN W6 [get_ports {sseg_ca[1]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {sseg_ca[1]}]
+set_property PACKAGE_PIN U8 [get_ports {sseg_ca[2]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {sseg_ca[2]}]
+set_property PACKAGE_PIN V8 [get_ports {sseg_ca[3]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {sseg_ca[3]}]
+set_property PACKAGE_PIN U5 [get_ports {sseg_ca[4]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {sseg_ca[4]}]
+set_property PACKAGE_PIN V5 [get_ports {sseg_ca[5]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {sseg_ca[5]}]
+set_property PACKAGE_PIN U7 [get_ports {sseg_ca[6]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {sseg_ca[6]}]
+
+set_property PACKAGE_PIN U2 [get_ports {sseg_an[0]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {sseg_an[0]}]
+set_property PACKAGE_PIN U4 [get_ports {sseg_an[1]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {sseg_an[1]}]
+set_property PACKAGE_PIN V4 [get_ports {sseg_an[2]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {sseg_an[2]}]
+set_property PACKAGE_PIN W4 [get_ports {sseg_an[3]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {sseg_an[3]}]
+
+# Constraints for PCLK
+set_property PACKAGE_PIN J1 [get_ports {pclk}]
+set_property IOSTANDARD LVCMOS33 [get_ports {pclk}]
 	
 ##USB-RS232 Interface
 #set_property PACKAGE_PIN B18 [get_ports RsRx]                        

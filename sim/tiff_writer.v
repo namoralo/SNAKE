@@ -13,7 +13,7 @@
 // using Verilog-2001 syntax.
 
 module tiff_writer (
-  input wire pclk_mirror,
+  input wire pclk,
   input wire [7:0] r,
   input wire [7:0] g,
   input wire [7:0] b,
@@ -376,7 +376,7 @@ module tiff_writer (
   reg go_delayed = 0;
   always @(go) go_delayed <= #1 go;
 
-  always @(negedge pclk_mirror)
+  always @(negedge pclk)
   begin
     if (file_open == 1)
     begin

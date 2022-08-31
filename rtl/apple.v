@@ -31,36 +31,36 @@ module apple(
     output reg [6:0] apple_x,
     output reg [5:0] apple_y,
     output reg [3:0] score // max 15
-    );
-    
+);
+
     reg [6:0] apple_x_nxt;
     reg [5:0] apple_y_nxt;
     reg [3:0] score_nxt;
-    
-    always @(posedge clk or posedge reset) begin
-        if(reset)begin
-            score <= 0;
-            apple_x <= 6'd20;
-            apple_y <= 5'd19;
-        end
-        else begin
-            score <= score_nxt;
-            apple_x <= apple_x_nxt;
-            apple_y <= apple_y_nxt;
-        end
+
+always @(posedge clk or posedge reset) begin
+    if(reset)begin
+        score <= 0;
+        apple_x <= 6'd20;
+        apple_y <= 5'd19;
     end
-    
-    always @* begin
-        if((head_x == apple_x) && (head_y == apple_y)) begin
-            apple_x_nxt = x_start_grid;
-            apple_y_nxt = y_start_grid;
-            score_nxt = score + 1;
-        end
-        else begin  
-            apple_x_nxt = apple_x;
-            apple_y_nxt = apple_y;
-            score_nxt = score;
-        end
+    else begin
+        score <= score_nxt;
+        apple_x <= apple_x_nxt;
+        apple_y <= apple_y_nxt;
     end
+end
+
+always @* begin
+    if((head_x == apple_x) && (head_y == apple_y)) begin
+        apple_x_nxt = x_start_grid;
+        apple_y_nxt = y_start_grid;
+        score_nxt = score + 1;
+    end
+    else begin  
+        apple_x_nxt = apple_x;
+        apple_y_nxt = apple_y;
+        score_nxt = score;
+    end
+end
 
 endmodule
