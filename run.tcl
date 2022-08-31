@@ -50,6 +50,7 @@ read_verilog {
     rtl/draw_apple.v
     rtl/draw_snake.v
     rtl/draw_game_over.v
+    rtl/draw_you_win.v
     rtl/draw_numbers.v
     rtl/draw_reset.v
     rtl/draw_score.v
