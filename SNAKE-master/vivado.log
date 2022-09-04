@@ -1,0 +1,25 @@
+#-----------------------------------------------------------
+# Vivado v2017.3 (64-bit)
+# SW Build 2018833 on Wed Oct  4 19:58:22 MDT 2017
+# IP Build 2016188 on Wed Oct  4 21:52:56 MDT 2017
+# Start of session at: Sun Sep  4 19:02:06 2022
+# Process ID: 23680
+# Current directory: C:/Studia/SEMESTR 4/UEC2/PROJEKTY/PROJEKT_najnowszy_snake/SNAKE-master
+# Command line: vivado.exe -mode tcl -source run.tcl -tclargs sim\
+# Log file: C:/Studia/SEMESTR 4/UEC2/PROJEKTY/PROJEKT_najnowszy_snake/SNAKE-master/vivado.log
+# Journal file: C:/Studia/SEMESTR 4/UEC2/PROJEKTY/PROJEKT_najnowszy_snake/SNAKE-master\vivado.jou
+#-----------------------------------------------------------
+source run.tcl
+# set project Snake
+# set top_module snake_top
+# set target xc7a35tcpg236-1
+# set bitstream_file build/${project}.runs/impl_1/${top_module}.bit
+# proc usage {} {
+#     puts "usage: vivado -mode tcl -source [info script] -tclargs \[simulation/bitstream/program\]"
+#     exit 1
+# }
+# if {($argc != 1) || ([lindex $argv 0] ni {"simulation" "bitstream" "program"})} {
+#     usage
+# }
+usage: vivado -mode tcl -source run.tcl -tclargs [simulation/bitstream/program]
+INFO: [Common 17-206] Exiting Vivado at Sun Sep  4 19:02:12 2022...
