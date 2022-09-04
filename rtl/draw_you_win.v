@@ -1,12 +1,12 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
+// Company: AGH
+// Engineer: Aleksandra Roman, Karolina Brodziak
 // 
 // Create Date: 27.08.2022 14:03:39
 // Design Name: 
 // Module Name: draw_you_win
-// Project Name: 
+// Project Name: Entliczek pentliczek
 // Target Devices: 
 // Tool Versions: 
 // Description: 

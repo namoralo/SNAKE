@@ -1,12 +1,12 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
+// Company: AGH
+// Engineer: Aleksandra Roman, Karolina Brodziak
 // 
 // Create Date: 17.08.2022 17:44:20
 // Design Name: 
 // Module Name: decoder
-// Project Name: 
+// Project Name: Entliczek pentliczek
 // Target Devices: 
 // Tool Versions: 
 // Description: 

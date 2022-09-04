@@ -1,12 +1,12 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
+// Company: AGH
+// Engineer: Aleksandra Roman, Karolina Brodziak
 // 
 // Create Date: 31.08.2022 20:51:34
 // Design Name: 
 // Module Name: snake_top
-// Project Name: 
+// Project Name: Entliczek pentliczek
 // Target Devices: 
 // Tool Versions: 
 // Description: 

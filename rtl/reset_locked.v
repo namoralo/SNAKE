@@ -1,12 +1,12 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
+// Company: AGH
+// Engineer: Aleksandra Roman, Karolina Brodziak
 // 
 // Create Date: 21.04.2022 10:11:18
 // Design Name: 
 // Module Name: reset_locked
-// Project Name: 
+// Project Name: Entliczek pentliczek
 // Target Devices: 
 // Tool Versions: 
 // Description: 

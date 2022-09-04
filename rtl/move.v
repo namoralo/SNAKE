@@ -1,12 +1,12 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
+// Company: AGH
+// Engineer: Aleksandra Roman, Karolina Brodziak
 // 
 // Create Date: 21.07.2022 19:57:46
 // Design Name: 
 // Module Name: move
-// Project Name: 
+// Project Name: Entliczek pentliczek
 // Target Devices: 
 // Tool Versions: 
 // Description: 

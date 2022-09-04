@@ -1,12 +1,13 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
+// Company: AGH
+// Engineer: Aleksandra Roman, Karolina Brodziak
 // 
 // Create Date: 31.07.2022 18:45:55
 // Design Name: 
 // Module Name: arcade_numbers_font
-// Project Name: 
+// Project Name: Entliczek pentliczek
+
 // Target Devices: 
 // Tool Versions: 
 // Description: 

@@ -14,6 +14,7 @@
  * 1 Jan 2016, RS - initial version
  * 12.01.22 dodanie bcd3
  * 12.01.22 zmienienie liczby wejœæ z 12 na 16
+ * Pobrano z upel
  *******************************************************************************/
 module bin2bcd (
         input  wire [15:0] bin,  // input binary number

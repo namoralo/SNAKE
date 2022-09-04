@@ -5,7 +5,7 @@
 // 
 // Create Date: 03/03/2015 09:33:36 PM
 // Design Name: 
-// Module Name: PS2Receiver
+// Module Name: PS2Receiver_copy
 // Project Name: Nexys4DDR Keyboard Demo
 // Target Devices: Nexys4DDR
 // Tool Versions: 
@@ -15,8 +15,8 @@
 // 
 // Revision:
 // Revision 0.01 - File Created
-// Additional Comments:
-// 
+// Additional Comments: Pobrano z https://digilent.com/reference/programmable-logic/basys-3/demos/keyboard
+// dodano tylko reset
 //////////////////////////////////////////////////////////////////////////////////
 
 

@@ -1,12 +1,12 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
+// Company: AGH
+// Engineer: Aleksandra Roman, Karolina Brodziak
 // 
 // Create Date: 20.07.2022 22:38:19
 // Design Name: 
 // Module Name: apple
-// Project Name: 
+// Project Name: Entliczek Pentliczek
 // Target Devices: 
 // Tool Versions: 
 // Description: 

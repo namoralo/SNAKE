@@ -6,7 +6,7 @@
 // Create Date: 07/27/2016 03:53:30 PM
 // Design Name: 
 // Module Name: uart_buf_con
-// Project Name: 
+// Project Name: Entliczek pentliczek
 // Target Devices: 
 // Tool Versions: 
 // Description: 

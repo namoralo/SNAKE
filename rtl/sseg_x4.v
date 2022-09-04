@@ -13,7 +13,7 @@
  * HISTORY:
  * 1 Jan 2016, RS - initial version
  * 4 Jan 2016, RS - removed clock divider
- *
+ *Pobrano z upel
  *******************************************************************************/
 module sseg_x4 (
         input  wire       clk, // posedge active clock, 100 MHz
