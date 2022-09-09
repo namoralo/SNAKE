@@ -10,7 +10,8 @@
  *
  * HISTORY:
  * 1 Jan 2016, RS - initial version
- * Pobrano z upel
+ *
+ * Pobrano z UPEL UEC1
  *******************************************************************************/
 module bcd2sseg (
         input  wire [3:0] bcd,

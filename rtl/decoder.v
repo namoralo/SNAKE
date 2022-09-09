@@ -30,7 +30,7 @@ module decoder(
 
     reg [4:0] direction_nxt;
 
-always@(posedge clk or posedge reset) begin
+always@(posedge clk) begin
     if(reset) begin
         direction <= 5'b10000;
     end

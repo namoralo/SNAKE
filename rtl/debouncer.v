@@ -15,7 +15,7 @@
 // 
 // Revision:
 // Revision 0.01 - File Created
-// Additional Comments:
+// Additional Comments: Pobrano z https://digilent.com/reference/programmable-logic/basys-3/demos/keyboard
 // 
 //////////////////////////////////////////////////////////////////////////////////
 

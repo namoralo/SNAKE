@@ -49,7 +49,7 @@ module draw_apple(
             
     reg [11:0] rgb_nxt;
 
-always @(posedge pclk or posedge rst) begin
+always @(posedge pclk) begin
     if(rst) begin
         hcount_out <= 0;
         hsync_out <= 0;

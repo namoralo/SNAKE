@@ -36,7 +36,7 @@ module move(
     reg [89:0] tail_y_nxt;
     reg [25:0] counter_px, counter_px_nxt;  
 
-always@(posedge clk or posedge reset) begin
+always@(posedge clk) begin
     if(reset) begin
         head_x <= 6'd32;
         head_y <= 5'd24;

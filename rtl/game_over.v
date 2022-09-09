@@ -70,7 +70,7 @@ module game_over(
         ||
         ((score >= 14) && (head_x == tail_x[97:91]) && (head_y == tail_y[83:78])) ));
 
-always @(posedge clk or posedge reset) begin
+always @(posedge clk) begin
     if(reset) begin
         game_over <= 0;
         victory <= 0;

@@ -10,9 +10,8 @@
  *
  * HISTORY:
  * 1 Jan 2016, RS - initial version
- * 19.01.22 dodanie parametru FREQ 
- * 19.01.22 zmienienie parametru LOOP_COUNTER_AT
- * Pobrano z upel
+ * 31.08.22 zmienienie parametru LOOP_COUNTER_AT
+ * Pobrano z UPEL UEC1
  *******************************************************************************/
 module clk_divider
 
@@ -21,7 +20,7 @@ module clk_divider
     )
        
     (
-        input  wire clk65MHz, // input clock 100 MHz
+        input  wire clk65MHz, // input clock 65 MHz
         input  wire rst,       // async reset active high
         output reg  clk_div    // output clock
     );

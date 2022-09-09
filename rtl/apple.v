@@ -37,14 +37,14 @@ module apple(
     reg [5:0] apple_y_nxt;
     reg [3:0] score_nxt;
 
-always @(posedge clk or posedge reset) begin
+always @(posedge clk) begin
     if(reset)begin
-        score <= 0;
+        score   <= 0;
         apple_x <= 6'd20;
         apple_y <= 5'd19;
     end
     else begin
-        score <= score_nxt;
+        score   <= score_nxt;
         apple_x <= apple_x_nxt;
         apple_y <= apple_y_nxt;
     end

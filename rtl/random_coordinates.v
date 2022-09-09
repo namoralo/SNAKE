@@ -34,7 +34,7 @@ module random_coordinates(
     reg [6:0] x_start_grid_nxt;
     reg [5:0] y_start_grid_nxt;
 
-always@(posedge clk or posedge reset) begin
+always@(posedge clk) begin
     if(reset) begin
         x_start_grid <= 20;
         y_start_grid <= 20;
@@ -60,4 +60,3 @@ always@* begin
 end
 
 endmodule
-

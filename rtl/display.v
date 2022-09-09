@@ -11,12 +11,12 @@
 * HISTORY:
 * 4 Jan 2016, RS - initial version
 * 31.08.22 zmienienie mainclock, usuniêcie zbêdnych modu³ów, podpiêcie score
+* Pobrano z UPEL UEC1
 *******************************************************************************/
 module display(
     input  wire       clk65MHz, // main clock, POSedge active
     input  wire       rst, 
     input wire [3:0] score,
-    
     // 7-segment display control (common anode)
     output wire [6:0] sseg_ca,   // segments (active LOW)
     output wire [3:0] sseg_an    // anode enable (active LOW)

@@ -10,7 +10,8 @@
  *
  * HISTORY:
  * 4 Jan 2016, RS - initial version
- *Pobrano z upel
+ *
+ * Pobrano z UPEL UEC1
  *******************************************************************************/
 module sseg_mux (
         input  wire [3:0] sel,         // single zero will select the input

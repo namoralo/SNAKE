@@ -24,6 +24,7 @@ module snake_top(
     input wire clk,
     input wire rst,
     input wire [3:0] btn,
+    input wire [4:1] rx,
     input wire PS2Clk,
     input wire PS2Data,
     output wire vs,
@@ -31,9 +32,10 @@ module snake_top(
     output wire [3:0] r,
     output wire [3:0] g,
     output wire [3:0] b,
-    //output wire tx,
     output wire [6:0] sseg_ca,   
     output wire [3:0] sseg_an,
+    output wire [3:0] tx,
+    output wire [15:0] led,
     output wire pclk
 );
 
@@ -105,27 +107,27 @@ wire vsync_dn, hsync_dn;
 wire vblnk_dn, hblnk_dn;
 wire [11:0] rgb_dn;
 
-wire [79:0] char_line_pixels_game_over;
+wire [63:0] char_line_pixels_game_over;
 wire [7:0] char_yx_game_over;
 wire [7:0] char_line_game_over;
 wire [7:0] char_code_game_over;
 
-wire [79:0] char_line_pixels_you_win;
+wire [63:0] char_line_pixels_you_win;
 wire [7:0] char_yx_you_win;
 wire [7:0] char_line_you_win;
 wire [7:0] char_code_you_win;
 
-wire [39:0] char_line_pixels_score;
+wire [31:0] char_line_pixels_score;
 wire [7:0] char_yx_score;
 wire [7:0] char_line_score;
 wire [7:0] char_code_score; 
 
-wire [39:0] char_line_pixels_reset;
+wire [31:0] char_line_pixels_reset;
 wire [7:0] char_yx_reset;
 wire [7:0] char_line_reset;
 wire [7:0] char_code_reset;
 
-wire [39:0] char_line_pixels_numbers;
+wire [31:0] char_line_pixels_numbers;
 wire [7:0] char_yx_numbers;
 wire [7:0] char_line_numbers;
 wire [7:0] char_code_numbers;
@@ -157,8 +159,8 @@ wire [89:0]  tail_y;
 wire [9:0] grid_size;
 wire [3:0] score;
 wire [4:0] direction;
-wire game_over, victory;
 wire [15:0] keycode;
+wire game_over, victory;
 
 //////////////////////////////////////////////////////////////////////////  
 vga_timing my_timing (
@@ -215,15 +217,6 @@ random_coordinates my_random_coordinates(
     .x_start_grid(x_start_grid),
     .y_start_grid(y_start_grid)
 );
-/*  
-top my_top(
-    .clk(kclk),
-    .PS2Data(PS2Data),
-    .PS2Clk(PS2Clk),
-    .tx(tx),
-    .keycode_out(keycode)
-);
-*/
 
 PS2Receiver_copy my_PS2Receiver(
     .reset(rst_locked),
@@ -377,10 +370,10 @@ draw_game_over my_draw_game_over(
 );
 
 draw_score_reset #(
-    .SCORE_RESET_X_POS_RECT(232),
+    .SCORE_RESET_X_POS_RECT(336),
     .SCORE_RESET_Y_POS_RECT(380),
-    .SCORE_RESET_WIDTH_RECT(560),
-    .SCORE_RESET_LENGTH_RECT(40)
+    .SCORE_RESET_WIDTH_RECT(352),
+    .SCORE_RESET_LENGTH_RECT(32)
 ) my_draw_score(
     .hcount_in(hcount_dgo),
     .hsync_in(hsync_dgo),
@@ -406,11 +399,11 @@ draw_score_reset #(
 );
 
 draw_score_reset #(
-    .SCORE_RESET_X_POS_RECT(472),
-    .SCORE_RESET_Y_POS_RECT(460),
-    .SCORE_RESET_WIDTH_RECT(80),
-    .SCORE_RESET_LENGTH_RECT(40)
-) my_draw_numbers(
+    .SCORE_RESET_X_POS_RECT(288),
+    .SCORE_RESET_Y_POS_RECT(540),
+    .SCORE_RESET_WIDTH_RECT(448),
+    .SCORE_RESET_LENGTH_RECT(64)
+) my_draw_reset(
     .hcount_in(hcount_dsc),
     .hsync_in(hsync_dsc),
     .hblnk_in(hblnk_dsc),
@@ -418,6 +411,35 @@ draw_score_reset #(
     .vsync_in(vsync_dsc),
     .vblnk_in(vblnk_dsc),
     .rgb_in(rgb_dsc),
+    .char_pixels_score_reset(char_line_pixels_reset),
+    .game_over(game_over), 
+    .victory(victory),
+    .rst(rst_locked),
+    .pclk(pclk),
+    .hcount_out(hcount_dr),
+    .hsync_out(hsync_dr),
+    .hblnk_out(hblnk_dr),
+    .vcount_out(vcount_dr),
+    .vsync_out(vsync_dr),
+    .vblnk_out(vblnk_dr),
+    .rgb_out(rgb_dr),
+    .char_yx_score_reset(char_yx_reset),
+    .char_line_score_reset(char_line_reset)
+);  
+
+draw_score_reset #(
+    .SCORE_RESET_X_POS_RECT(480),
+    .SCORE_RESET_Y_POS_RECT(444),
+    .SCORE_RESET_WIDTH_RECT(64),
+    .SCORE_RESET_LENGTH_RECT(32)
+) my_draw_numbers(
+    .hcount_in(hcount_dr),
+    .hsync_in(hsync_dr),
+    .hblnk_in(hblnk_dr),
+    .vcount_in(vcount_dr),
+    .vsync_in(vsync_dr),
+    .vblnk_in(vblnk_dr),
+    .rgb_in(rgb_dr),
     .char_pixels_score_reset(char_line_pixels_numbers),
     .game_over(game_over), 
     .victory(victory),
@@ -433,36 +455,7 @@ draw_score_reset #(
     .char_yx_score_reset(char_yx_numbers),
     .char_line_score_reset(char_line_numbers)
 );
-
-draw_score_reset #(
-    .SCORE_RESET_X_POS_RECT(232),
-    .SCORE_RESET_Y_POS_RECT(580),
-    .SCORE_RESET_WIDTH_RECT(560),
-    .SCORE_RESET_LENGTH_RECT(80)
-) my_draw_reset(
-    .hcount_in(hcount_dn),
-    .hsync_in(hsync_dn),
-    .hblnk_in(hblnk_dn),
-    .vcount_in(vcount_dn),
-    .vsync_in(vsync_dn),
-    .vblnk_in(vblnk_dn),
-    .rgb_in(rgb_dn),
-    .char_pixels_score_reset(char_line_pixels_reset),
-    .game_over(game_over), 
-    .victory(victory),
-    .rst(rst_locked),
-    .pclk(pclk),
-    .hcount_out(hcount_dr),
-    .hsync_out(hsync_dr),
-    .hblnk_out(hblnk_dr),
-    .vcount_out(vcount_dr),
-    .vsync_out(vsync_dr),
-    .vblnk_out(vblnk_dr),
-    .rgb_out(rgb_dr),
-    .char_yx_score_reset(char_yx_reset),
-    .char_line_score_reset(char_line_reset)
-);           
-
+        
 arcade_game_over_font my_arcade_game_over_font(
     .clk(pclk),
     .addr({char_code_game_over,char_line_game_over}),
@@ -532,12 +525,21 @@ display my_display(
     .sseg_an(sseg_an) 
 );
 
+multiplayer my_multiplayer(
+       .clk(pclk), 
+       .reset(rst_locked),
+       .score(score),
+       .r_score(rx),
+       .led(led)
+       );
+       
 ///////////////////////////////////////////////////////////////////////////////////////
-assign hs = hsync_dr;
-assign vs = vsync_dr;
-assign r = rgb_dr[11:8];
-assign g = rgb_dr[7:4]; 
-assign b = rgb_dr[3:0]; 
+assign hs = hsync_dn;
+assign vs = vsync_dn;
+assign r = rgb_dn[11:8];
+assign g = rgb_dn[7:4]; 
+assign b = rgb_dn[3:0];
+assign tx = score; 
 
 endmodule
 

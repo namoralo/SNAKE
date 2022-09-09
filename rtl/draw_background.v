@@ -52,8 +52,6 @@ module draw_background(
     output wire [5:0] number_y_grid,
     output wire [9:0] grid_size
 );
-
-    reg [11:0] rgb_nxt;
     
     localparam 
         HOR_PIX       = 1024,
@@ -71,6 +69,8 @@ module draw_background(
         BORDER_COLOR = 12'h7_4_0,
         BACKGROUND_COLOR = 12'hd_a_5;
 
+    reg [11:0] rgb_nxt;
+
     assign hor_pix = HOR_PIX;
     assign ver_pix = VER_PIX;
     assign frame_x_size_grid = FRAME_X_SIZE;
@@ -87,7 +87,7 @@ module draw_background(
     assign number_y_grid = NUMBER_Y_GRID;
     assign grid_size = GRID_SIZE;
 
-always @(posedge pclk or posedge rst) begin
+always @(posedge pclk) begin
     if(rst) begin
         hcount_out <= 0;
         hsync_out <= 0;

@@ -35,20 +35,17 @@ always @(posedge clk)
 
 always @* begin
     case (char_yx)
-        8'h00: data = 8'h00; //
-        8'h01: data = 8'h00; //
-        8'h02: data = 8'h59; //Y
-        8'h03: data = 8'h4f; //O
-        8'h04: data = 8'h55; //U
-        8'h05: data = 8'h52; //R
-        8'h06: data = 8'h00; //
-        8'h07: data = 8'h53; //S
-        8'h08: data = 8'h43; //C
-        8'h09: data = 8'h4f; //O
-        8'h0a: data = 8'h52; //R
-        8'h0b: data = 8'h45; //E
-        8'h0c: data = 8'h3a; //:
-        8'h0d: data = 8'h00; //
+        8'h00: data = 8'h59; //Y
+        8'h01: data = 8'h4f; //O
+        8'h02: data = 8'h55; //U
+        8'h03: data = 8'h52; //R
+        8'h04: data = 8'h00; //
+        8'h05: data = 8'h53; //S
+        8'h06: data = 8'h43; //C
+        8'h07: data = 8'h4f; //O
+        8'h08: data = 8'h52; //R
+        8'h09: data = 8'h45; //E
+        8'h0a: data = 8'h3a; //;
         
         default: data = 8'h00;
     endcase

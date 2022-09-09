@@ -1,3 +1,13 @@
+//////////////////////////////////////////////////////////////////////////////////////////
+/*
+Module name: vga_timing
+Author: Aleksandra Roman, Karolina Brodziak
+Version: 1.0
+Last modified: 20.07.2022
+Coding style: safe with FPGA sync reset
+Description: Generate vsync, hsync for 1024@768
+*/
+//////////////////////////////////////////////////////////////////////////////////////////
 // File: vga_timing.v
 // This is the vga timing design for EE178 Lab #4.
 
@@ -36,7 +46,7 @@ module vga_timing (
     reg [10:0] vcount_nxt, hcount_nxt;
     reg vsync_nxt, vblnk_nxt, hsync_nxt, hblnk_nxt;
 
-always@(posedge pclk or posedge rst) begin
+always@(posedge pclk) begin
     if(rst)begin
         hcount <= 10'b0;
         hblnk <= 0;

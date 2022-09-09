@@ -1,4 +1,4 @@
-set project Snake
+set project Entliczek_Pentliczek
 set top_module snake_top
 set target xc7a35tcpg236-1
 set bitstream_file build/${project}.runs/impl_1/${top_module}.bit
@@ -36,7 +36,7 @@ if {[lindex $argv 0] == "program"} {
 }
 
 read_xdc {
-    constraints/vga_example.xdc
+    constraints/SNAKE.xdc
     constraints/clk_wiz_0.xdc
     constraints/clk_wiz_0_board.xdc
     constraints/clk_wiz_0_late.xdc
@@ -57,6 +57,7 @@ read_verilog {
     rtl/PS2Receiver_copy.v
     rtl/decoder.v
     rtl/move.v
+    rtl/delay.v
     rtl/game_over.v
     rtl/arcade_game_over_font.v    
     rtl/arcade_you_win_font.v
@@ -77,11 +78,8 @@ read_verilog {
     rtl/reset_locked.v
     rtl/clk_wiz_0.v
     rtl/clk_wiz_0_clk_wiz.v
-    rtl/top.v
-    rtl/bin2ascii.v
     rtl/debouncer.v
-    rtl/uart_buf_con.v
-    rtl/uart_tx.v
+    rtl/multiplayer.v
 }
 
 add_files -fileset sim_1 {

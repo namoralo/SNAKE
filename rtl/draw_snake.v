@@ -51,7 +51,7 @@ module draw_snake(
     
     reg [11:0] rgb_nxt;
 
-always @(posedge clk or posedge reset) begin
+always @(posedge clk) begin
     if(reset) begin
         hcount_out <= 0;
         hsync_out <= 0;

@@ -1,5 +1,5 @@
 `timescale 1ns/1ps
-/*****************************************************************************
+/******************************************************************************
  * (C) Copyright 2016 AGH UST All Rights Reserved
  *
  * MODULE:    ring_counter
@@ -11,7 +11,8 @@
  *
  * HISTORY:
  * 1 Jan 2016, RS - initial version
- * Pobrano z upel
+ *
+ * Pobrano z UPEL UEC1
  *****************************************************************************/
 module ring_counter
     # ( parameter
