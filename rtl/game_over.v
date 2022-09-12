@@ -9,7 +9,7 @@
 // Project Name: Entliczek pentliczek
 // Target Devices: 
 // Tool Versions: 
-// Description: 
+// Description: Warunki na koniec gry - uderzenie w ramkê i ugryzienie siebie
 // 
 // Dependencies: 
 // 
@@ -33,7 +33,7 @@ module game_over(
     input wire [5:0] head_y,
     input wire [104:0] tail_x,
     input wire [89:0]  tail_y,
-    input wire [3:0] score,
+    input wire [3:0]   score,
     output reg game_over, victory
 );
 

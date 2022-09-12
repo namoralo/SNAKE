@@ -9,7 +9,7 @@
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
-// Description: 
+// Description: Ma³a czcionka dla cyfr
 // 
 // Dependencies: 
 // 
@@ -23,7 +23,7 @@
 module arcade_numbers_font(
     input  wire        clk,
     input  wire [15:0] addr,            
-    output reg  [31:0]  char_line_pixels 
+    output reg  [31:0] char_line_pixels 
 );
     
     // signal declaration

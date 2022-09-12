@@ -9,7 +9,7 @@
 // Project Name: Entliczek pentliczek
 // Target Devices: 
 // Tool Versions: 
-// Description: 
+// Description: Du¿a czcionka dla napisu GAME OVER
 // 
 // Dependencies: 
 // 
@@ -23,7 +23,7 @@
 module arcade_game_over_font(
     input  wire        clk,
     input  wire [15:0] addr,            
-    output reg  [63:0]  char_line_pixels 
+    output reg  [63:0] char_line_pixels 
 );
 
     // signal declaration

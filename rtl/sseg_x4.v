@@ -17,7 +17,7 @@
  * Pobrano z UPEL UEC1
  *******************************************************************************/
 module sseg_x4 (
-        input  wire       clk, // posedge active clock, 100 MHz
+        input  wire       clk, // posedge active clock, 65 MHz
         input  wire       rst,       // async reset active HIGH
         input  wire [3:0] bcd0,      // bcd inputs
         input  wire [3:0] bcd1,

@@ -9,7 +9,7 @@
 // Project Name: Entliczek pentliczek
 // Target Devices: 
 // Tool Versions: 
-// Description: 
+// Description: Rysowanie napisów pisanych ma³¹ czcionk¹
 // 
 // Dependencies: 
 // 
@@ -90,25 +90,25 @@ always @(posedge pclk) begin
 end
 
 
-	delay #(
-        .WIDTH (38),
-        .CLK_DEL(3)
-    ) my3clk_delay (
-        .clk (pclk),
-        .rst (rst),
-        .din ({hcount_in, hsync_in,hblnk_in, vcount_in, vsync_in,vblnk_in,rgb_in}),
-        .dout ({hcount_delay, hsync_delay,hblnk_delay, vcount_delay, vsync_delay,vblnk_delay,rgb_out_d})
-    );
-	
-	delay #(
-        .WIDTH (8),
-        .CLK_DEL(1)
-    ) my1clk_delay (
-        .clk (pclk),
-        .rst (rst),
-        .din (char_line_score_reset_nxt),
-        .dout (char_line_score_reset_nxt_d)
-    );
+delay #(
+    .WIDTH (38),
+    .CLK_DEL(3)
+) my3clk_delay (
+    .clk (pclk),
+    .rst (rst),
+    .din ({hcount_in, hsync_in,hblnk_in, vcount_in, vsync_in,vblnk_in,rgb_in}),
+    .dout ({hcount_delay, hsync_delay,hblnk_delay, vcount_delay, vsync_delay,vblnk_delay,rgb_out_d})
+);
+
+delay #(
+    .WIDTH (8),
+    .CLK_DEL(1)
+) my1clk_delay (
+    .clk (pclk),
+    .rst (rst),
+    .din (char_line_score_reset_nxt),
+    .dout (char_line_score_reset_nxt_d)
+);
 	
 	
     assign y_score_reset = ((vcount_in - SCORE_RESET_Y_POS_RECT)>>5);

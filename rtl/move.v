@@ -11,7 +11,7 @@
 // Tool Versions: 
 // Description: 
 // 
-// Dependencies: 
+// Dependencies: Poruszanie siê g¹sienic¹
 // 
 // Revision:
 // Revision 0.01 - File Created
@@ -27,14 +27,14 @@ module move(
     output reg [6:0] head_x,
     output reg [5:0] head_y,
     output reg [104:0] tail_x,
-    output reg [89:0] tail_y
+    output reg [89:0]  tail_y
 );
 
     reg [6:0] head_x_nxt;
     reg [5:0] head_y_nxt;
     reg [104:0] tail_x_nxt;
-    reg [89:0] tail_y_nxt;
-    reg [25:0] counter_px, counter_px_nxt;  
+    reg [89:0]  tail_y_nxt;
+    reg [25:0]  counter_px, counter_px_nxt;  
 
 always@(posedge clk) begin
     if(reset) begin
@@ -54,7 +54,7 @@ always@(posedge clk) begin
 end
 
 always @* begin
-    if(counter_px == 15165696-1) begin
+    if(counter_px == 15165696-1) begin // 15165696  = 14*HOR_TOTAL*VER_TOTAL
         counter_px_nxt = 0;
         case (direction)
             5'b00001: begin // ->

@@ -9,7 +9,7 @@
 // Project Name: Entliczek pentliczek
 // Target Devices: 
 // Tool Versions: 
-// Description: 
+// Description: Porównwanie wyników obydwóch p³ytek i zaœwiecanie ledów na wygrywaj¹cej p³ytce (lub remis)
 // 
 // Dependencies: 
 // 
@@ -25,23 +25,22 @@ module multiplayer(
     input wire [3:0] score,
     input wire [3:0] r_score,
     output reg [15:0] led
-    );
+);
     
     reg [15:0] led_nxt;
     
-    always@(posedge clk) begin
-        if (reset)
-            led <= 16'b0;
-        else
-            led <= led_nxt;
-    end
-    
-    always @* begin
-    if(score >= r_score)
-        led_nxt = 16'b1111111111111111;
+always@(posedge clk) begin
+    if (reset)
+        led <= 16'b0;
     else
-        led_nxt = 16'b0;
-    end
-    
-    
+        led <= led_nxt;
+end
+
+always @* begin
+if(score >= r_score)
+    led_nxt = 16'b1111111111111111;
+else
+    led_nxt = 16'b0;
+end
+     
 endmodule

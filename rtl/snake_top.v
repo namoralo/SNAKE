@@ -42,12 +42,12 @@ module snake_top(
 // Converts 100 MHz clk into 65 MHz pclk.
 
 wire locked;
-wire kclk, rst_locked;
+wire rst_locked;
 
 clk_wiz_0 my_clk_wiz_0
 (
     // Clock out ports  
-    .clk100MHz(kclk),
+    .clk100MHz(),
     .clk65MHz(pclk),
     // Status and control signals               
     .reset(rst), 
@@ -132,20 +132,12 @@ wire [7:0] char_yx_numbers;
 wire [7:0] char_line_numbers;
 wire [7:0] char_code_numbers;
 
-wire [9:0] hor_pix;
-wire [9:0] ver_pix;
 wire [6:0] frame_x_inside_grid;
 wire [5:0] frame_y_inside_grid;
 wire [6:0] frame_x_outside_grid;
 wire [5:0] frame_y_outside_grid;
-wire [9:0] frame_x_inside_px;
-wire [9:0] frame_y_inside_px;
 wire [6:0] number_x_grid;
 wire [5:0] number_y_grid;
-wire [6:0] frame_x_size_grid;
-wire [5:0] frame_y_size_grid;
-wire [9:0] frame_x_outside_px;
-wire [9:0] frame_y_outside_px; 
 wire [6:0] x_start_grid;
 wire [5:0] y_start_grid ;
 
@@ -190,14 +182,6 @@ draw_background my_draw_background(
     .vsync_out(vsync_db),
     .vblnk_out(vblnk_db),
     .rgb_out(rgb_db),
-    .hor_pix(hor_pix),
-    .ver_pix(ver_pix),
-    .frame_x_size_grid(frame_x_size_grid),
-    .frame_y_size_grid(frame_y_size_grid),
-    .frame_x_inside_px(frame_x_inside_px),
-    .frame_y_inside_px(frame_y_inside_px),
-    .frame_x_outside_px(frame_x_outside_px),
-    .frame_y_outside_px(frame_y_outside_px),
     .frame_x_inside_grid(frame_x_inside_grid),
     .frame_y_inside_grid(frame_y_inside_grid),
     .frame_x_outside_grid(frame_x_outside_grid),

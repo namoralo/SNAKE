@@ -1,3 +1,5 @@
+// Pobrano z UPEL UEC2
+//
 // The module delays the input data 'din' by the number of clock cycles
 // set by CLK_DEL input parameter
 `timescale 1 ns / 1 ps

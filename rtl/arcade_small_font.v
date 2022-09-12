@@ -9,7 +9,7 @@
 // Project Name: Entliczek pentliczek
 // Target Devices: 
 // Tool Versions: 
-// Description: 
+// Description: Ma³a czcionka
 // 
 // Dependencies: 
 // 
@@ -23,7 +23,7 @@
 module arcade_small_font(
     input  wire        clk,
     input  wire [15:0] addr,            
-    output reg  [31:0]  char_line_pixels // pixels of the character line
+    output reg  [31:0] char_line_pixels 
 );
 
     // signal declaration

@@ -9,7 +9,7 @@
 // Project Name: Entliczek pentliczek
 // Target Devices: 
 // Tool Versions: 
-// Description: 
+// Description: Rysowanie jasnego t³a i br¹zowej ramki
 // 
 // Dependencies: 
 // 
@@ -36,14 +36,6 @@ module draw_background(
     output reg vsync_out,
     output reg vblnk_out,
     output reg [11:0] rgb_out,
-    output wire [9:0] hor_pix,
-    output wire [9:0] ver_pix,
-    output wire [6:0] frame_x_size_grid,
-    output wire [5:0] frame_y_size_grid,
-    output wire [9:0] frame_x_inside_px,
-    output wire [9:0] frame_y_inside_px,
-    output wire [9:0] frame_x_outside_px,
-    output wire [9:0] frame_y_outside_px,
     output wire [6:0] frame_x_inside_grid,
     output wire [5:0] frame_y_inside_grid,
     output wire [6:0] frame_x_outside_grid,
@@ -71,14 +63,6 @@ module draw_background(
 
     reg [11:0] rgb_nxt;
 
-    assign hor_pix = HOR_PIX;
-    assign ver_pix = VER_PIX;
-    assign frame_x_size_grid = FRAME_X_SIZE;
-    assign frame_y_size_grid = FRAME_Y_SIZE;
-    assign frame_x_inside_px = FRAME_X_INSIDE;
-    assign frame_y_inside_px = FRAME_Y_INSIDE;
-    assign frame_x_outside_px = FRAME_X_OUTSIDE;
-    assign frame_y_outside_px = FRAME_Y_OUTSIDE;
     assign frame_x_inside_grid = (FRAME_X_INSIDE/GRID_SIZE);
     assign frame_y_inside_grid = (FRAME_Y_INSIDE/GRID_SIZE);
     assign frame_x_outside_grid = (FRAME_X_OUTSIDE/GRID_SIZE);

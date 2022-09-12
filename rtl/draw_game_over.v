@@ -9,7 +9,7 @@
 // Project Name: Entliczek pentliczek
 // Target Devices: 
 // Tool Versions: 
-// Description: 
+// Description: Rysowanie napisu GAME OVER
 // 
 // Dependencies: 
 // 

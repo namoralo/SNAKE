@@ -9,7 +9,7 @@
 // Project Name: Entliczek Pentliczek
 // Target Devices: 
 // Tool Versions: 
-// Description: 
+// Description: Zdobywanie punktów za jedzenie jab³ek
 // 
 // Dependencies: 
 // 

@@ -9,7 +9,7 @@
 // Project Name: Entliczek pentliczek
 // Target Devices: 
 // Tool Versions: 
-// Description: 
+// Description: Rysowanie jab³ka
 // 
 // Dependencies: 
 // 
@@ -43,9 +43,7 @@ module draw_apple(
 );
 
     localparam
-        APPLE_COLOR = 12'hb_2_0,
-        APPLE_STEM_COLOR = 12'h8_5_0,
-        APPLE_LEAF_COLOR = 12'h1_6_0;
+        APPLE_COLOR = 12'hb_2_0;
             
     reg [11:0] rgb_nxt;
 

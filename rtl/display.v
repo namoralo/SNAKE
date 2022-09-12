@@ -25,13 +25,13 @@ module display(
     wire        clk10kHz; // LCD clock, POSedge active
 
 //------------------------------------------------------------------------------------------------
-// clock divider to produce LCD multiplexing 10000 Hz clock from 100 MHz external clock
+// clock divider to produce LCD multiplexing 10000 Hz clock from 65 MHz external clock
 clk_divider
 #(
     .FREQ(10000)          // 4-bit ring counter
 )
 u_clk_divider_display(
-    .clk65MHz(clk65MHz), //input clock 100 MHz
+    .clk65MHz(clk65MHz), //input clock 65 MHz
     .rst (rst),            //async reset active high
     .clk_div (clk10kHz)
 );
